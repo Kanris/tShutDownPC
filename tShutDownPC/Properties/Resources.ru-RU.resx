@@ -118,51 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutDescription" xml:space="preserve">
-    <value>The program allows you to turn off the PC, depending on the selected conditions</value>
+    <value>Программа позволяющая выключать ПК в зависимости от выбранных условий</value>
   </data>
   <data name="AboutTab" xml:space="preserve">
-    <value>About</value>
+    <value>О программе</value>
   </data>
   <data name="Activation" xml:space="preserve">
-    <value>License Activation</value>
-  </data>
-  <data name="ByTimer" xml:space="preserve">
-    <value>By timer</value>
-  </data>
-  <data name="ByTimerCheckBox" xml:space="preserve">
-    <value>Enable shutdown by timer</value>
-  </data>
-  <data name="DisableInternetType" xml:space="preserve">
-    <value>DisableInternet</value>
+    <value>Активация лицензии</value>
   </data>
   <data name="LanEn" xml:space="preserve">
     <value>EN</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Change Language</value>
+    <value>Сменить язык</value>
   </data>
   <data name="LanRu" xml:space="preserve">
     <value>РУ</value>
   </data>
-  <data name="LogoutType" xml:space="preserve">
-    <value>Logout</value>
-  </data>
-  <data name="RebootType" xml:space="preserve">
-    <value>Reboot</value>
-  </data>
   <data name="SettingsTab" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="ShutdownGroup" xml:space="preserve">
-    <value>Choose "shutdown" type</value>
-  </data>
-  <data name="ShutdownType" xml:space="preserve">
-    <value>Shutdown</value>
-  </data>
-  <data name="SleepType" xml:space="preserve">
-    <value>Sleep</value>
+    <value>Настройки</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>PC Shutdown program</value>
+    <value>Программа выключения ПК</value>
   </data>
 </root>

@@ -3,10 +3,91 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:local="clr-namespace:tShutDownPC"
+        xmlns:l="clr-namespace:tShutDownPC.Properties"
+        xmlns:Models="clr-namespace:tShutDownPC.Models"
+        xmlns:util="clr-namespace:tShutDownPC.Support"
+        xmlns:converters="clr-namespace:tShutDownPC.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{util:Localization Title}" Height="450" Width="500">
+    <Window.DataContext>
+        <Models:MainWindowModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <converters:ShutdownConverter x:Key="shutdownConverterKey" />
+
+        <Style x:Key="disableTimePicker" TargetType="{x:Type wpfTool:TimePicker}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=cbByTimer,Path=IsChecked}" Value="False">
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.Column="0" VerticalAlignment="Top">
+            <MenuItem Header="{util:Localization Language}" >
+                <MenuItem Header="{util:Localization LanEn}" Command="{Binding Path=ChangeLanguageToEn}" />
+                <MenuItem Header="{util:Localization LanRu}" Command="{Binding Path=ChangeLanguageToRu}"/>
+            </MenuItem>
+            <MenuItem Header="{util:Localization Activation}" />
+        </Menu>
+        <TabControl Grid.Row="1" Grid.Column="0">
+            <TabItem Header="{util:Localization SettingsTab}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25*"/>
+                        <RowDefinition Height="25*"/>
+                        <RowDefinition Height="100*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="{util:Localization ShutdownGroup}" Grid.Row="0" Grid.RowSpan="2">
+                        <StackPanel>
+                            <RadioButton IsChecked="{Binding Path=ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Shutdown}">
+                                <TextBlock Text="{util:Localization ShutdownType}" />
+                            </RadioButton>
+                            <RadioButton IsChecked="{Binding Path=ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Sleep}">
+                                <TextBlock Text="{util:Localization SleepType}" />
+                            </RadioButton>
+                            <RadioButton IsChecked="{Binding Path=ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Logout}">
+                                <TextBlock Text="{util:Localization LogoutType}" />
+                            </RadioButton>
+                            <RadioButton IsChecked="{Binding Path=ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Reboot}">
+                                <TextBlock Text="{util:Localization RebootType}" />
+                            </RadioButton>
+                            <RadioButton IsChecked="{Binding Path=ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=DisableInternet}">
+                                <TextBlock Text="{util:Localization DisableInternetType}" />
+                            </RadioButton>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="{util:Localization ByTimer}" Grid.Column="1">
+                        <StackPanel>
+                            <CheckBox x:Name="cbByTimer" IsChecked="{Binding Path=IsByTimerEnabled}">
+                                <TextBlock Text="{util:Localization ByTimerCheckBox}"/>
+                            </CheckBox>
+                            <wpfTool:TimePicker Value="{Binding Path=ShutdownPCTimerByTimer}" Style="{StaticResource disableTimePicker}" />
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{util:Localization AboutTab}">
+                <TextBlock Text="{util:Localization AboutDescription}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
