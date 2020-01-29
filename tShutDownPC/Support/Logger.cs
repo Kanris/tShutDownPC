@@ -16,10 +16,10 @@ namespace tShutDownPC.Support
         /// Write log about shutdown event
         /// </summary>
         /// <param name="shutdownType">type of shutdowh</param>
-        public static void WriteLog(ShutdownType shutdownType)
+        public static void WriteLog(ShutdownType shutdownType, ShutdownOptions shutdownOptions)
         {
             var pathToLogDirectory = CreateLogDirectoryIfNotExists(); //get path to the log directory
-            WriteLogInFile(shutdownType, pathToLogDirectory); //write log about shutdown event
+            WriteLogInFile(shutdownType, shutdownOptions, pathToLogDirectory); //write log about shutdown event
         }
 
         /// <summary>
@@ -45,18 +45,21 @@ namespace tShutDownPC.Support
             }
         }
 
-        private static void WriteLogInFile(ShutdownType shutdownType, string pathToLogDirectory)
+        private static void WriteLogInFile(ShutdownType shutdownType, ShutdownOptions shutdownOptions, string pathToLogDirectory)
         {
             if (!string.IsNullOrEmpty(pathToLogDirectory))
             {
-                var filePath = $"{DateTime.Now.ToString("dd-MM-yyyy")}.log"; //path to log file
+                var filePath = $@"{pathToLogDirectory}\{DateTime.Now.ToString("dd-MM-yyyy")}.log"; //path to log file
 
                 if (!File.Exists(filePath)) //if file is not exists
-                    File.Create(filePath); //create it
+                {
+                    var createdFile = File.Create(filePath); //create it
+                    createdFile.Close(); //close created file to free process
+                }
 
                 using (var textWriter = new StreamWriter(filePath))
                 {
-                    textWriter.WriteLine($"{DateTime.Now} - {shutdownType.ToString()}");
+                    textWriter.WriteLine($"{DateTime.Now} - {shutdownType.ToString()} - {shutdownOptions.ToString()}");
                 }
             }
         }

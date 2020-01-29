@@ -17,7 +17,7 @@
     <Window.Resources>
         <converters:ShutdownConverter x:Key="shutdownConverterKey" />
 
-        <Style x:Key="disableTimePicker" TargetType="{x:Type wpfTool:TimePicker}">
+        <Style x:Key="disableTimePicker" TargetType="{x:Type TextBox}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=cbByTimer,Path=IsChecked}" Value="False">
                     <Setter Property="IsEnabled" Value="False" />
@@ -25,6 +25,16 @@
 
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="disableIntegerPicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=cbByCPU,Path=IsChecked}" Value="False">
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -80,7 +90,17 @@
                             <CheckBox x:Name="cbByTimer" IsChecked="{Binding Path=IsByTimerEnabled}">
                                 <TextBlock Text="{util:Localization ByTimerCheckBox}"/>
                             </CheckBox>
-                            <wpfTool:TimePicker Value="{Binding Path=ShutdownPCTimerByTimer}" Style="{StaticResource disableTimePicker}" />
+                            <!--<wpfTool:TimePicker Value="{Binding Path=ShutdownPCTimerByTimer}" Style="{StaticResource disableTimePicker}" />-->
+                            <TextBox Text="{Binding Path=ShutdownPCTimeByTimer}" Style="{StaticResource disableTimePicker}" />
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="{util:Localization ByCPU}" Grid.Column="1" Grid.Row="1">
+                        <StackPanel>
+                            <CheckBox x:Name="cbByCPU" IsChecked="{Binding Path=IsByCpuLoadEnabled}">
+                                <TextBlock Text="{util:Localization ByCPUCheckBox}"/>
+                            </CheckBox>
+                            <wpfTool:IntegerUpDown Value="{Binding Path=MaximumThreshold}" Style="{StaticResource disableIntegerPicker}"/>
                         </StackPanel>
                     </GroupBox>
                 </Grid>

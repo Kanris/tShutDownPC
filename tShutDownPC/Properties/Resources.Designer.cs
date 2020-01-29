@@ -88,6 +88,24 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to By CPU.
+        /// </summary>
+        public static string ByCPU {
+            get {
+                return ResourceManager.GetString("ByCPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable shutdow by CPU Load.
+        /// </summary>
+        public static string ByCPUCheckBox {
+            get {
+                return ResourceManager.GetString("ByCPUCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to By timer.
         /// </summary>
         public static string ByTimer {
