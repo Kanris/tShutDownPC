@@ -80,6 +80,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Support\ChangeLanguage.cs" />
+    <Compile Include="Support\LicenseCheck.cs" />
     <Compile Include="Support\LocalizationExtension.cs" />
     <Compile Include="Support\Logger.cs" />
     <Compile Include="Support\RelayCommand.cs" />

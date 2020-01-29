@@ -119,15 +119,33 @@ namespace tShutDownPC.Models
 
         public MainWindowModel()
         {
+            InitLicense();
             InitVariables();
             InitTimer();
         }
 
+        /// <summary>
+        /// Initialzie Global values
+        /// </summary>
         private void InitVariables()
         {
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
         }
 
+        /// <summary>
+        /// Check/Create license entry
+        /// </summary>
+        private void InitLicense()
+        {
+            if (!LicenseCheck.IsLicenseAvailable())
+            {
+                //open license activation window
+            }
+        }
+
+        /// <summary>
+        /// Init global timer
+        /// </summary>
         private void InitTimer()
         {
             m_GlobalTimer = new Timer(1 * 1000); //tick every 1 second
