@@ -61,10 +61,17 @@ namespace tShutDownPC.Service
             }
             set
             {
+                ShutdownCounter = value;
+
                 m_ShutdownPCTimeByTimer = value;
                 OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Seconds to shutdown pc
+        /// </summary>
+        public int ShutdownCounter;
 
         /// <summary>
         /// Indicate is shutdown by cpu load is enabled

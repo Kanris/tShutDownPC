@@ -168,7 +168,7 @@ namespace tShutDownPC.ViewModels
         private void PerformShutdown(ShutdownOptions shutdownOptions)
         {
             Logger.WriteLog(ApplicationSettings.ShutdownType, shutdownOptions); //write log about shutdown
-            //ShutdownPC.PerformShutdown(ShutdownType); //perform shutdown base on type
+            ShutdownPC.PerformShutdown(ApplicationSettings.ShutdownType); //perform shutdown base on type
 
             m_GlobalTimer.Stop(); //stop timer
         }
@@ -182,12 +182,12 @@ namespace tShutDownPC.ViewModels
             if (ApplicationSettings.IsByTimerEnabled)
             {
                 //if timer is expired
-                if (ApplicationSettings.ShutdownPCTimeByTimer <= 0)
+                if (ApplicationSettings.ShutdownCounter <= 0)
                 {
                     PerformShutdown(ShutdownOptions.Timer); //write log about shutdown and perform it
                 }
                 else //timer is not expired
-                    ApplicationSettings.ShutdownPCTimeByTimer--; //indicate one tick
+                    ApplicationSettings.ShutdownCounter--; //indicate one tick
             }
 
             //if shutdown by CPU load is enabled
