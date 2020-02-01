@@ -57,6 +57,7 @@
                 <MenuItem Header="{util:Localization LanRu}" Command="{Binding Path=ChangeLanguageToRuCommand}"/>
             </MenuItem>
             <MenuItem Header="{util:Localization Activation}" Command="{Binding Path=OpenLicenseWindowCommand}" />
+            <MenuItem Header="{util:Localization SaveSettings}" Command="{Binding Path=SaveSettingsCommand}" />
         </Menu>
         <TabControl Grid.Row="1" Grid.Column="0">
             <TabItem Header="{util:Localization SettingsTab}">
@@ -73,19 +74,19 @@
 
                     <GroupBox Header="{util:Localization ShutdownGroup}" Grid.Row="0" Grid.RowSpan="2">
                         <StackPanel>
-                            <RadioButton IsChecked="{Binding Path=ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Shutdown}">
+                            <RadioButton IsChecked="{Binding Path=ApplicationSettings.ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Shutdown}">
                                 <TextBlock Text="{util:Localization ShutdownType}" />
                             </RadioButton>
-                            <RadioButton IsChecked="{Binding Path=ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Sleep}">
+                            <RadioButton IsChecked="{Binding Path=ApplicationSettings.ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Sleep}">
                                 <TextBlock Text="{util:Localization SleepType}" />
                             </RadioButton>
-                            <RadioButton IsChecked="{Binding Path=ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Logout}">
+                            <RadioButton IsChecked="{Binding Path=ApplicationSettings.ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Logout}">
                                 <TextBlock Text="{util:Localization LogoutType}" />
                             </RadioButton>
-                            <RadioButton IsChecked="{Binding Path=ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Reboot}">
+                            <RadioButton IsChecked="{Binding Path=ApplicationSettings.ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=Reboot}">
                                 <TextBlock Text="{util:Localization RebootType}" />
                             </RadioButton>
-                            <RadioButton IsChecked="{Binding Path=ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=DisableInternet}">
+                            <RadioButton IsChecked="{Binding Path=ApplicationSettings.ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=DisableInternet}">
                                 <TextBlock Text="{util:Localization DisableInternetType}" />
                             </RadioButton>
                         </StackPanel>
@@ -93,20 +94,20 @@
 
                     <GroupBox Header="{util:Localization ByTimer}" Grid.Column="1">
                         <StackPanel>
-                            <CheckBox x:Name="cbByTimer" IsChecked="{Binding Path=IsByTimerEnabled}">
+                            <CheckBox x:Name="cbByTimer" IsChecked="{Binding Path=ApplicationSettings.IsByTimerEnabled}">
                                 <TextBlock Text="{util:Localization ByTimerCheckBox}"/>
                             </CheckBox>
                             <!--<wpfTool:TimePicker Value="{Binding Path=ShutdownPCTimerByTimer}" Style="{StaticResource disableTimePicker}" />-->
-                            <TextBox Text="{Binding Path=ShutdownPCTimeByTimer}" Style="{StaticResource disableTimePicker}" />
+                            <TextBox Text="{Binding Path=ApplicationSettings.ShutdownPCTimeByTimer}" Style="{StaticResource disableTimePicker}" />
                         </StackPanel>
                     </GroupBox>
 
                     <GroupBox Header="{util:Localization ByCPU}" Grid.Column="1" Grid.Row="1">
                         <StackPanel>
-                            <CheckBox x:Name="cbByCPU" IsChecked="{Binding Path=IsByCpuLoadEnabled}">
+                            <CheckBox x:Name="cbByCPU" IsChecked="{Binding Path=ApplicationSettings.IsByCpuLoadEnabled}">
                                 <TextBlock Text="{util:Localization ByCPUCheckBox}"/>
                             </CheckBox>
-                            <wpfTool:IntegerUpDown Value="{Binding Path=MaximumThreshold}" Style="{StaticResource disableIntegerPicker}"/>
+                            <wpfTool:IntegerUpDown Value="{Binding Path=ApplicationSettings.MaximumThreshold}" Style="{StaticResource disableIntegerPicker}"/>
                         </StackPanel>
                     </GroupBox>
                 </Grid>
