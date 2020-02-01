@@ -21,74 +21,15 @@ namespace tShutDownPC.ViewModels
         #region properties
 
         /// <summary>
-        /// What method of "shutdown" should we perform
+        /// Application settings
         /// </summary>
-        private ShutdownType m_ShutdownType;
-        public ShutdownType ShutdownType
+        private Settings m_ApplicationSettings;
+        public Settings ApplicationSettings
         {
-            get => m_ShutdownType;
+            get => m_ApplicationSettings;
             set
             {
-                m_ShutdownType = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// Indicate is shutdown by timer is enabled
-        /// </summary>
-        private bool m_IsByTimerEnabled;
-        public bool IsByTimerEnabled
-        {
-            get => m_IsByTimerEnabled;
-            set
-            {
-                m_IsByTimerEnabled = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// Shutdown time for bytimer
-        /// </summary>
-        private int m_ShutdownPCTimeByTimer = 30;
-        public int ShutdownPCTimeByTimer
-        {
-            get
-            {
-                return m_ShutdownPCTimeByTimer;
-            }
-            set
-            {
-                m_ShutdownPCTimeByTimer = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// Indicate is shutdown by cpu load is enabled
-        /// </summary>
-        private bool m_IsByCpuLoadEnabled;
-        public bool IsByCpuLoadEnabled
-        {
-            get => m_IsByCpuLoadEnabled;
-            set
-            {
-                m_IsByCpuLoadEnabled = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// Maximum CPU threshold to perform "shutdown"
-        /// </summary>
-        private float m_maximumThreshold = 80;
-        public float MaximumThreshold
-        {
-            get => m_maximumThreshold;
-            set
-            {
-                m_maximumThreshold = value;
+                m_ApplicationSettings = value;
                 OnPropertyChanged();
             }
         }
@@ -121,16 +62,15 @@ namespace tShutDownPC.ViewModels
         private RelayCommand m_LoadedCommand;
         public RelayCommand LoadedCommand => m_LoadedCommand ?? (m_LoadedCommand = new RelayCommand(CheckLicense));
 
+        /// <summary>
+        /// Command to save settings into settings file
+        /// </summary>
+        private RelayCommand m_SaveSettingsCommand;
+        public RelayCommand SaveSettingsCommand => m_SaveSettingsCommand ?? (m_SaveSettingsCommand = new RelayCommand(SaveSettings));
+
         #endregion commands
 
         #region initialize
-
-        public MainWindowModel()
-        {
-            InitVariables(); //initialize global valuse
-            InitTimer(); //initialize and start global timer for shutdown
-        }
-
         /// <summary>
         /// Initialzie Global values
         /// </summary>
@@ -149,6 +89,16 @@ namespace tShutDownPC.ViewModels
             m_GlobalTimer.Start(); //start global timer
         }
 
+        /// <summary>
+        /// Init settings
+        /// </summary>
+        private void InitiSettings()
+        {
+            ApplicationSettings = Settings.GetSettings(); //get saved settings
+
+            ChangeLanguage.ChangeLanguageTo(ApplicationSettings.ApplicationLanguage); //change application settings
+        }
+
         #endregion initialize
 
         #region methods
@@ -158,7 +108,8 @@ namespace tShutDownPC.ViewModels
         /// </summary>
         private void ChangeLocalizationToEn(object obj)
         {
-            ChangeLanguage.ChangeLanguageTo(Service.Enums.LanguageSettings.EN);
+            ApplicationSettings.ApplicationLanguage = Service.Enums.LanguageSettings.EN;
+            ChangeLanguage.ChangeLanguageTo(ApplicationSettings.ApplicationLanguage);
         }
 
         /// <summary>
@@ -166,7 +117,8 @@ namespace tShutDownPC.ViewModels
         /// </summary>
         private void ChangeLocalizationToRu(object obj)
         {
-            ChangeLanguage.ChangeLanguageTo(Service.Enums.LanguageSettings.RU);
+            ApplicationSettings.ApplicationLanguage = Service.Enums.LanguageSettings.RU;
+            ChangeLanguage.ChangeLanguageTo(ApplicationSettings.ApplicationLanguage);
         }
 
         /// <summary>
@@ -195,6 +147,18 @@ namespace tShutDownPC.ViewModels
             {
                 OpenLicenseDialog(obj); //open license activation dialog
             }
+
+            InitiSettings(); //initialize global settings            
+            InitVariables(); //initialize global valuse
+            InitTimer(); //initialize and start global timer for shutdown
+        }
+
+        /// <summary>
+        /// Save settings into file
+        /// </summary>
+        private void SaveSettings(object obj)
+        {
+            Settings.SaveSettings(ApplicationSettings); //save current settings
         }
 
         /// <summary>
@@ -203,7 +167,7 @@ namespace tShutDownPC.ViewModels
         /// <param name="shutdownOptions">when shutdown occures</param>
         private void PerformShutdown(ShutdownOptions shutdownOptions)
         {
-            Logger.WriteLog(ShutdownType, shutdownOptions); //write log about shutdown
+            Logger.WriteLog(ApplicationSettings.ShutdownType, shutdownOptions); //write log about shutdown
             //ShutdownPC.PerformShutdown(ShutdownType); //perform shutdown base on type
 
             m_GlobalTimer.Stop(); //stop timer
@@ -215,22 +179,22 @@ namespace tShutDownPC.ViewModels
         private void M_GlobalTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             //if shutdown by timer is enabled
-            if (IsByTimerEnabled)
+            if (ApplicationSettings.IsByTimerEnabled)
             {
                 //if timer is expired
-                if (ShutdownPCTimeByTimer <= 0)
+                if (ApplicationSettings.ShutdownPCTimeByTimer <= 0)
                 {
                     PerformShutdown(ShutdownOptions.Timer); //write log about shutdown and perform it
                 }
                 else //timer is not expired
-                    ShutdownPCTimeByTimer--; //indicate one tick
+                    ApplicationSettings.ShutdownPCTimeByTimer--; //indicate one tick
             }
 
             //if shutdown by CPU load is enabled
-            if (IsByCpuLoadEnabled)
+            if (ApplicationSettings.IsByCpuLoadEnabled)
             {
                 //if cpu laod is greater than value
-                if (cpuCounter.NextValue() > MaximumThreshold)
+                if (cpuCounter.NextValue() > ApplicationSettings.MaximumThreshold)
                 {
                     PerformShutdown(ShutdownOptions.Load); //write log about shutdown and perform it
                 }

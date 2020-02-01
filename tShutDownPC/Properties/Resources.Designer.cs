@@ -178,6 +178,15 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save settings.
+        /// </summary>
+        public static string SaveSettings {
+            get {
+                return ResourceManager.GetString("SaveSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string SettingsTab {
