@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using tShutDownPC.Properties;
 
-namespace tShutDownPC.Support
+namespace tShutDownPC.Service
 {
     public class TranslationSource : INotifyPropertyChanged
     {

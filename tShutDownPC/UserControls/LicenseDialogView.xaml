@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="tShutDownPC.Service.Dialog.LicenseDialogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:tShutDownPC.Service.Dialog"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="4">
+        <TextBox Text="{Binding ActivationKey}" HorizontalAlignment="Left" Margin="35,30,0,0" Width="250"  VerticalAlignment="Top" />
+
+        <Button Content="Activate" HorizontalAlignment="Left" Margin="135,70,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding ActivateCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+
+        <Button Content="Close window" HorizontalAlignment="Left" Margin="215,70,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding CloseActivationWindow}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+    </Grid>
+</UserControl>

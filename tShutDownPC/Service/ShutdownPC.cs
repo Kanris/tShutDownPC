@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using tShutDownPC.Service.Enums;
 
-namespace tShutDownPC.Support
+namespace tShutDownPC.Service
 {
     public static class ShutdownPC
     {

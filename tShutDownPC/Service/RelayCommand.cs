@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace tShutDownPC.Support
+namespace tShutDownPC.Service
 {
     public class RelayCommand : ICommand
     {

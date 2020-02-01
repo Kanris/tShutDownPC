@@ -2,8 +2,9 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Timers;
+using System.Windows;
+using tShutDownPC.Service;
 using tShutDownPC.Service.Enums;
-using tShutDownPC.Support;
 
 namespace tShutDownPC.ViewModels
 {
@@ -114,13 +115,18 @@ namespace tShutDownPC.ViewModels
         private RelayCommand m_OpenLicenseWindowCommand;
         public RelayCommand OpenLicenseWindowCommand => m_OpenLicenseWindowCommand ?? (m_OpenLicenseWindowCommand = new RelayCommand(OpenLicenseDialog));
 
+        /// <summary>
+        /// Command to check license when window loaded
+        /// </summary>
+        private RelayCommand m_LoadedCommand;
+        public RelayCommand LoadedCommand => m_LoadedCommand ?? (m_LoadedCommand = new RelayCommand(CheckLicense));
+
         #endregion commands
 
         #region initialize
 
         public MainWindowModel()
         {
-            InitLicense(); //perform license check
             InitVariables(); //initialize global valuse
             InitTimer(); //initialize and start global timer for shutdown
         }
@@ -131,17 +137,6 @@ namespace tShutDownPC.ViewModels
         private void InitVariables()
         {
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-        }
-
-        /// <summary>
-        /// Check/Create license entry
-        /// </summary>
-        private void InitLicense()
-        {
-            if (!LicenseCheck.IsLicenseAvailable())
-            {
-                //open license activation window
-            }
         }
 
         /// <summary>
@@ -177,10 +172,29 @@ namespace tShutDownPC.ViewModels
         /// <summary>
         /// Opens license dialog
         /// </summary>
-        /// <param name="obj"></param>
         private void OpenLicenseDialog(object obj)
         {
+            var dialogViewModel = new DialogWindowModel(); //create viewmodel for dialog window
 
+            var dialogResult = DialogService.OpenDialog(dialogViewModel);
+
+            //if user haven't activate product in dialog window AND he has not available license
+            if (dialogResult != DialogResult.Yes && !LicenseCheck.IsLicenseAvailable())
+            {
+                Application.Current.Shutdown(); //close application
+            }
+        }
+
+        /// <summary>
+        /// Check is license expired; and if it's expired open license activation dialog
+        /// </summary>
+        private void CheckLicense(object obj)
+        {
+            //check is license is license expired
+            if (!LicenseCheck.IsLicenseAvailable())
+            {
+                OpenLicenseDialog(obj); //open license activation dialog
+            }
         }
 
         /// <summary>

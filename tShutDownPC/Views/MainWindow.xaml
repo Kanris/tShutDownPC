@@ -7,10 +7,11 @@
         xmlns:local="clr-namespace:tShutDownPC"
         xmlns:l="clr-namespace:tShutDownPC.Properties"
         xmlns:ViewModels="clr-namespace:tShutDownPC.ViewModels"
-        xmlns:util="clr-namespace:tShutDownPC.Support"
+        xmlns:util="clr-namespace:tShutDownPC.Service"
         xmlns:converters="clr-namespace:tShutDownPC.Converters"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="{util:Localization Title}" Height="450" Width="500">
+        Title="{util:Localization Title}" Height="450" Width="500" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <ViewModels:MainWindowModel/>
     </Window.DataContext>
@@ -35,6 +36,13 @@
 
     </Window.Resources>
     <Grid>
+
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>

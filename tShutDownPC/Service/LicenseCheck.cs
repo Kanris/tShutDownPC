@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace tShutDownPC.Support
+namespace tShutDownPC.Service
 {
     public static class LicenseCheck
     {
         /// <summary>
         /// Key to activate product
         /// </summary>
-        private const string ACTIVATION_KEY = "HELLO WORLD";
+        private const string ACTIVATION_KEY = "HelloWorld";
 
         /// <summary>
         /// Path to license in registry

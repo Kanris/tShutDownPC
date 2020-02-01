@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace tShutDownPC.Service.Enums
 {
-    enum DialogResult
+    public enum DialogResult
     {
         Undefined,
         Yes,
