@@ -44,6 +44,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -96,6 +98,7 @@
     <Compile Include="Service\LicenseCheck.cs" />
     <Compile Include="Service\LocalizationExtension.cs" />
     <Compile Include="Service\Logger.cs" />
+    <Compile Include="Service\MouseHelper.cs" />
     <Compile Include="Service\RelayCommand.cs" />
     <Compile Include="Service\Settings.cs" />
     <Compile Include="Service\ShutdownPC.cs" />
