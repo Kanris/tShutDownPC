@@ -71,22 +71,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ShutdownConverter.cs" />
-    <Compile Include="Enums\LanguageSettings.cs" />
-    <Compile Include="Enums\ShutdownOptions.cs" />
-    <Compile Include="Enums\ShutdownType.cs" />
+    <Compile Include="Service\Enums\DialogResult.cs" />
+    <Compile Include="Service\Enums\LanguageSettings.cs" />
+    <Compile Include="Service\Enums\ShutdownOptions.cs" />
+    <Compile Include="Service\Enums\ShutdownType.cs" />
     <Compile Include="Properties\Resources.ru-RU.Designer.cs">
       <DependentUpon>Resources.ru-RU.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Support\ChangeLanguage.cs" />
-    <Compile Include="Support\LicenseCheck.cs" />
-    <Compile Include="Support\LocalizationExtension.cs" />
-    <Compile Include="Support\Logger.cs" />
-    <Compile Include="Support\RelayCommand.cs" />
-    <Compile Include="Support\ShutdownPC.cs" />
-    <Compile Include="Support\TranslationSource.cs" />
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Service\ChangeLanguage.cs" />
+    <Compile Include="Service\LicenseCheck.cs" />
+    <Compile Include="Service\LocalizationExtension.cs" />
+    <Compile Include="Service\Logger.cs" />
+    <Compile Include="Service\RelayCommand.cs" />
+    <Compile Include="Service\ShutdownPC.cs" />
+    <Compile Include="Service\TranslationSource.cs" />
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -94,13 +95,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\MainWindowModel.cs" />
+    <Compile Include="ViewModels\MainWindowModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

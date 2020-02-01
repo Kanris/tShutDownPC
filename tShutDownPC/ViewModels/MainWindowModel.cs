@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
-using tShutDownPC.Enums;
+using tShutDownPC.Service.Enums;
 using tShutDownPC.Support;
 
-namespace tShutDownPC.Models
+namespace tShutDownPC.ViewModels
 {
     public class MainWindowModel : INotifyPropertyChanged
     {
@@ -104,14 +99,20 @@ namespace tShutDownPC.Models
         /// <summary>
         /// Command to change application language to english
         /// </summary>
-        private RelayCommand m_ChangeLanguageToEn;
-        public RelayCommand ChangeLanguageToEn => m_ChangeLanguageToEn ?? (m_ChangeLanguageToEn = new RelayCommand(ChangeLocalizationToEn));
+        private RelayCommand m_ChangeLanguageToEnCommand;
+        public RelayCommand ChangeLanguageToEnCommand => m_ChangeLanguageToEnCommand ?? (m_ChangeLanguageToEnCommand = new RelayCommand(ChangeLocalizationToEn));
 
         /// <summary>
         /// Command to change application language to russian
         /// </summary>
-        private RelayCommand m_ChangeLanguageToRu;
-        public RelayCommand ChangeLanguageToRu => m_ChangeLanguageToRu ?? (m_ChangeLanguageToRu = new RelayCommand(ChangeLocalizationToRu));
+        private RelayCommand m_ChangeLanguageToRuCommand;
+        public RelayCommand ChangeLanguageToRuCommand => m_ChangeLanguageToRuCommand ?? (m_ChangeLanguageToRuCommand = new RelayCommand(ChangeLocalizationToRu));
+
+        /// <summary>
+        /// Command to open license window
+        /// </summary>
+        private RelayCommand m_OpenLicenseWindowCommand;
+        public RelayCommand OpenLicenseWindowCommand => m_OpenLicenseWindowCommand ?? (m_OpenLicenseWindowCommand = new RelayCommand(OpenLicenseDialog));
 
         #endregion commands
 
@@ -119,9 +120,9 @@ namespace tShutDownPC.Models
 
         public MainWindowModel()
         {
-            InitLicense();
-            InitVariables();
-            InitTimer();
+            InitLicense(); //perform license check
+            InitVariables(); //initialize global valuse
+            InitTimer(); //initialize and start global timer for shutdown
         }
 
         /// <summary>
@@ -162,7 +163,7 @@ namespace tShutDownPC.Models
         /// </summary>
         private void ChangeLocalizationToEn(object obj)
         {
-            ChangeLanguage.ChangeLanguageTo(Enums.LanguageSettings.EN);
+            ChangeLanguage.ChangeLanguageTo(Service.Enums.LanguageSettings.EN);
         }
 
         /// <summary>
@@ -170,7 +171,16 @@ namespace tShutDownPC.Models
         /// </summary>
         private void ChangeLocalizationToRu(object obj)
         {
-            ChangeLanguage.ChangeLanguageTo(Enums.LanguageSettings.RU);
+            ChangeLanguage.ChangeLanguageTo(Service.Enums.LanguageSettings.RU);
+        }
+
+        /// <summary>
+        /// Opens license dialog
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OpenLicenseDialog(object obj)
+        {
+
         }
 
         /// <summary>

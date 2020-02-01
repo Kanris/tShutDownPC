@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace tShutDownPC.Enums
+namespace tShutDownPC.Service.Enums
 {
     public enum LanguageSettings
     {

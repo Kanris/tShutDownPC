@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using tShutDownPC.Enums;
+using tShutDownPC.Service.Enums;
 
 namespace tShutDownPC.Support
 {
