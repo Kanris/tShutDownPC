@@ -173,6 +173,21 @@ namespace tShutDownPC.Models
             ChangeLanguage.ChangeLanguageTo(Enums.LanguageSettings.RU);
         }
 
+        /// <summary>
+        /// Write log and perform choosen shutdown
+        /// </summary>
+        /// <param name="shutdownOptions">when shutdown occures</param>
+        private void PerformShutdown(ShutdownOptions shutdownOptions)
+        {
+            Logger.WriteLog(ShutdownType, shutdownOptions); //write log about shutdown
+            //ShutdownPC.PerformShutdown(ShutdownType); //perform shutdown base on type
+
+            m_GlobalTimer.Stop(); //stop timer
+        }
+
+        /// <summary>
+        /// Global timer that can trigger shutdown
+        /// </summary>
         private void M_GlobalTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             //if shutdown by timer is enabled
@@ -181,10 +196,7 @@ namespace tShutDownPC.Models
                 //if timer is expired
                 if (ShutdownPCTimeByTimer <= 0)
                 {
-                    Logger.WriteLog(ShutdownType, ShutdownOptions.Timer); //write log about it
-                    ShutdownPC.PerformShutdown(ShutdownType); //perform shutdown base on type
-
-                    m_GlobalTimer.Stop(); //stop timer
+                    PerformShutdown(ShutdownOptions.Timer); //write log about shutdown and perform it
                 }
                 else //timer is not expired
                     ShutdownPCTimeByTimer--; //indicate one tick
@@ -196,10 +208,7 @@ namespace tShutDownPC.Models
                 //if cpu laod is greater than value
                 if (cpuCounter.NextValue() > MaximumThreshold)
                 {
-                    Logger.WriteLog(ShutdownType, ShutdownOptions.Load); //write log about it
-                    ShutdownPC.PerformShutdown(ShutdownType); //perform shutdown base on type
-
-                    m_GlobalTimer.Stop(); //stop timer
+                    PerformShutdown(ShutdownOptions.Load); //write log about shutdown and perform it
                 }
             }
         }
