@@ -88,6 +88,15 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application settings.
+        /// </summary>
+        public static string ApplicationSettings {
+            get {
+                return ResourceManager.GetString("ApplicationSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to By Audio.
         /// </summary>
         public static string ByAudio {
@@ -183,6 +192,15 @@ namespace tShutDownPC.Properties {
         public static string DisableInternetType {
             get {
                 return ResourceManager.GetString("DisableInternetType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On close hide in tray.
+        /// </summary>
+        public static string HideInTray {
+            get {
+                return ResourceManager.GetString("HideInTray", resourceCulture);
             }
         }
         

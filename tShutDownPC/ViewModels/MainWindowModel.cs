@@ -16,6 +16,8 @@ namespace tShutDownPC.ViewModels
 
         private PerformanceCounter cpuCounter; //CPU statistic
 
+        private TrayService m_TrayService;
+
         #endregion fields
 
         #region properties
@@ -90,6 +92,16 @@ namespace tShutDownPC.ViewModels
         }
 
         /// <summary>
+        /// Init and show tray icon
+        /// </summary>
+        private void InitTray()
+        {
+            m_TrayService = new TrayService(); //initialize tray icon
+
+            Application.Current.MainWindow.Closing += new CancelEventHandler(OnMainWindowClosing); //subscribe to main window closing
+        }
+
+        /// <summary>
         /// Init settings
         /// </summary>
         private void InitiSettings()
@@ -102,6 +114,21 @@ namespace tShutDownPC.ViewModels
         #endregion initialize
 
         #region methods
+
+        /// <summary>
+        /// When user tries to close main window
+        /// </summary>
+        private void OnMainWindowClosing(object sender, CancelEventArgs e)
+        {
+            //if application should hide in tray
+            if (ApplicationSettings.IsHideInTray)
+            {
+                e.Cancel = true;
+                App.Current.MainWindow.Visibility = Visibility.Hidden;
+
+                m_TrayService?.ShowTrayNotification();
+            }
+        }
 
         /// <summary>
         /// Change application language to en
@@ -151,6 +178,7 @@ namespace tShutDownPC.ViewModels
             InitiSettings(); //initialize global settings            
             InitVariables(); //initialize global valuse
             InitTimer(); //initialize and start global timer for shutdown
+            InitTray(); //init tray icon
         }
 
         /// <summary>

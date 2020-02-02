@@ -124,6 +124,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service\TrayService.cs" />
     <Compile Include="UserControls\LicenseDialogView.xaml.cs">
       <DependentUpon>LicenseDialogView.xaml</DependentUpon>
     </Compile>
@@ -168,6 +169,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

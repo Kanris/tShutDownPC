@@ -35,6 +35,24 @@ namespace tShutDownPC.Service
             }
         }
 
+        #region settings
+
+        /// <summary>
+        /// Indicate that when users press close mainwindow it will hide or not in tray
+        /// </summary>
+        private bool m_IsHideInTray;
+        public bool IsHideInTray
+        {
+            get => m_IsHideInTray;
+            set
+            {
+                m_IsHideInTray = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion settings
+
         #region timer
 
         /// <summary>

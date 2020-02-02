@@ -11,7 +11,9 @@
         xmlns:converters="clr-namespace:tShutDownPC.Converters"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="{util:Localization Title}" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="{util:Localization Title}" 
+        SizeToContent="WidthAndHeight" 
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <ViewModels:MainWindowModel/>
     </Window.DataContext>
@@ -115,6 +117,14 @@
                             <RadioButton IsChecked="{Binding Path=ApplicationSettings.ShutdownType, Converter={StaticResource shutdownConverterKey}, ConverterParameter=DisableInternet}">
                                 <TextBlock Text="{util:Localization DisableInternetType}" />
                             </RadioButton>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="{util:Localization ApplicationSettings}" Grid.Column="0" Grid.Row="2">
+                        <StackPanel>
+                            <CheckBox IsChecked="{Binding Path=ApplicationSettings.IsHideInTray}">
+                                <TextBlock Text="{util:Localization HideInTray}"/>
+                            </CheckBox>
                         </StackPanel>
                     </GroupBox>
 
