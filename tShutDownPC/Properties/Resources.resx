@@ -138,8 +138,14 @@
   <data name="ByCPUCheckBox" xml:space="preserve">
     <value>Enable shutdown by CPU Load</value>
   </data>
+  <data name="ByCPUMicrophoneBox" xml:space="preserve">
+    <value>Enable shutdown by Microphone activity</value>
+  </data>
   <data name="ByCPUMouseBox" xml:space="preserve">
     <value>Enable shutdown by Mouse activity</value>
+  </data>
+  <data name="ByMicrophone" xml:space="preserve">
+    <value>By Microphone</value>
   </data>
   <data name="ByMouse" xml:space="preserve">
     <value>By mouse</value>

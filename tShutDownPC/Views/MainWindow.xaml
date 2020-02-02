@@ -11,7 +11,7 @@
         xmlns:converters="clr-namespace:tShutDownPC.Converters"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="{util:Localization Title}" Height="450" Width="500" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="{util:Localization Title}" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <ViewModels:MainWindowModel/>
     </Window.DataContext>
@@ -50,6 +50,14 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="disableMicrophonePicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=cbByMicrophone,Path=IsChecked}" Value="False">
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    
     </Window.Resources>
     <Grid>
 
@@ -79,6 +87,7 @@
             <TabItem Header="{util:Localization SettingsTab}">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="25*"/>
                         <RowDefinition Height="25*"/>
                         <RowDefinition Height="25*"/>
                         <RowDefinition Height="25*"/>
@@ -143,6 +152,15 @@
                                 <TextBlock Text="{util:Localization ByCPUAudioBox}"/>
                             </CheckBox>
                             <wpfTool:IntegerUpDown Value="{Binding Path=ApplicationSettings.ShutdownPCTimeByAudio}" Style="{StaticResource disableAudioPicker}"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="{util:Localization ByMicrophone}" Grid.Column="1" Grid.Row="5">
+                        <StackPanel>
+                            <CheckBox x:Name="cbByMicrophone" IsChecked="{Binding Path=ApplicationSettings.IsByMicrophoneEnabled}">
+                                <TextBlock Text="{util:Localization ByCPUMicrophoneBox}"/>
+                            </CheckBox>
+                            <wpfTool:IntegerUpDown Value="{Binding Path=ApplicationSettings.ShutdownPCTimeByMicrophone}" Style="{StaticResource disableMicrophonePicker}"/>
                         </StackPanel>
                     </GroupBox>
 

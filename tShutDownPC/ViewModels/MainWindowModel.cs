@@ -168,7 +168,7 @@ namespace tShutDownPC.ViewModels
         private void PerformShutdown(ShutdownOptions shutdownOptions)
         {
             Logger.WriteLog(ApplicationSettings.ShutdownType, shutdownOptions); //write log about shutdown
-            //ShutdownPC.PerformShutdown(ApplicationSettings.ShutdownType); //perform shutdown base on type
+            ShutdownPC.PerformShutdown(ApplicationSettings.ShutdownType); //perform shutdown base on type
 
             m_GlobalTimer.Stop(); //stop timer
         }
@@ -200,19 +200,33 @@ namespace tShutDownPC.ViewModels
                 }
             }
 
+            //is shutdown by mouse inactivity enabled
             if (ApplicationSettings.IsByMouseEnabled)
             {
+                //check is mouse still inactive
                 if (MouseHelper.ComparePoints(ref ApplicationSettings.ShutdownCounterMouse, ApplicationSettings.ShutdownPCTimeByMouse))
                 {
-                    PerformShutdown(ShutdownOptions.Load); //write log about shutdown and perform it
+                    PerformShutdown(ShutdownOptions.Mouse); //write log about shutdown and perform it
                 }
             }
 
+            //is shutdown by audio enabled
             if (ApplicationSettings.IsByAudioEnabled)
             {
+                //check is audio output is inactive
                 if (SpeakerHelper.ComapreAudioNoise(ref ApplicationSettings.ShutdownCounterAudio, ApplicationSettings.ShutdownPCTimeByAudio))
                 {
-                    PerformShutdown(ShutdownOptions.Load); //write log about shutdown and perform it
+                    PerformShutdown(ShutdownOptions.Audio); //write log about shutdown and perform it
+                }
+            }
+
+            //is shutdown by microphone enabled
+            if (ApplicationSettings.IsByMicrophoneEnabled)
+            {
+                //check is microphone input is inactive
+                if (MicrophoneHelper.CompareMicrophone(ref ApplicationSettings.ShutdownCounterMicrophone, ApplicationSettings.ShutdownPCTimeByMicrophone))
+                {
+                    PerformShutdown(ShutdownOptions.Microphone); //write log about shutdown and perform it
                 }
             }
         }

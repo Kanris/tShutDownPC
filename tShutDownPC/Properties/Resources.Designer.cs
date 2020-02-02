@@ -124,11 +124,29 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable shutdown by Microphone activity.
+        /// </summary>
+        public static string ByCPUMicrophoneBox {
+            get {
+                return ResourceManager.GetString("ByCPUMicrophoneBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable shutdown by Mouse activity.
         /// </summary>
         public static string ByCPUMouseBox {
             get {
                 return ResourceManager.GetString("ByCPUMouseBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By Microphone.
+        /// </summary>
+        public static string ByMicrophone {
+            get {
+                return ResourceManager.GetString("ByMicrophone", resourceCulture);
             }
         }
         
