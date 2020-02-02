@@ -35,6 +35,8 @@ namespace tShutDownPC.Service
             }
         }
 
+        #region timer
+
         /// <summary>
         /// Indicate is shutdown by timer is enabled
         /// </summary>
@@ -73,6 +75,10 @@ namespace tShutDownPC.Service
         /// </summary>
         public int ShutdownCounter;
 
+        #endregion timer
+
+        #region CPU
+
         /// <summary>
         /// Indicate is shutdown by cpu load is enabled
         /// </summary>
@@ -101,6 +107,53 @@ namespace tShutDownPC.Service
             }
         }
 
+        #endregion audio
+
+        #region mouse
+
+        /// <summary>
+        /// Indicate is shutdown by timer is enabled
+        /// </summary>
+        private bool m_IsByMouseEnabled;
+        public bool IsByMouseEnabled
+        {
+            get => m_IsByMouseEnabled;
+            set
+            {
+                m_IsByMouseEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Shutdown time for bytimer
+        /// </summary>
+        private int m_ShutdownPCTimeByMouse = 30;
+        public int ShutdownPCTimeByMouse
+        {
+            get
+            {
+                return m_ShutdownPCTimeByMouse;
+            }
+            set
+            {
+                ShutdownCounterMouse = value;
+
+                m_ShutdownPCTimeByMouse = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Seconds to shutdown pc
+        /// </summary>
+        public int ShutdownCounterMouse;
+
+        #endregion mouse
+
+        /// <summary>
+        /// Current application language
+        /// </summary>
         public LanguageSettings ApplicationLanguage { set; get; }
 
         #endregion properties

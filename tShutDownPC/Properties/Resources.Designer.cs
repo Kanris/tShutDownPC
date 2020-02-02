@@ -97,11 +97,29 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable shutdow by CPU Load.
+        ///   Looks up a localized string similar to Enable shutdown by CPU Load.
         /// </summary>
         public static string ByCPUCheckBox {
             get {
                 return ResourceManager.GetString("ByCPUCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable shutdown by Mouse activity.
+        /// </summary>
+        public static string ByCPUMouseBox {
+            get {
+                return ResourceManager.GetString("ByCPUMouseBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By mouse.
+        /// </summary>
+        public static string ByMouse {
+            get {
+                return ResourceManager.GetString("ByMouse", resourceCulture);
             }
         }
         

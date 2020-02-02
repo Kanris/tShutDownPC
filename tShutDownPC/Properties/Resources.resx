@@ -130,7 +130,13 @@
     <value>By CPU</value>
   </data>
   <data name="ByCPUCheckBox" xml:space="preserve">
-    <value>Enable shutdow by CPU Load</value>
+    <value>Enable shutdown by CPU Load</value>
+  </data>
+  <data name="ByCPUMouseBox" xml:space="preserve">
+    <value>Enable shutdown by Mouse activity</value>
+  </data>
+  <data name="ByMouse" xml:space="preserve">
+    <value>By mouse</value>
   </data>
   <data name="ByTimer" xml:space="preserve">
     <value>By timer</value>

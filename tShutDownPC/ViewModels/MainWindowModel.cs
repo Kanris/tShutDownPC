@@ -199,6 +199,14 @@ namespace tShutDownPC.ViewModels
                     PerformShutdown(ShutdownOptions.Load); //write log about shutdown and perform it
                 }
             }
+
+            if (ApplicationSettings.IsByMouseEnabled)
+            {
+                if (MouseHelper.ComparePoints(ref ApplicationSettings.ShutdownCounterMouse, ApplicationSettings.ShutdownPCTimeByMouse))
+                {
+                    PerformShutdown(ShutdownOptions.Load); //write log about shutdown and perform it
+                }
+            }
         }
 
         #endregion methods

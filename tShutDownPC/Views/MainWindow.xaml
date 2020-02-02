@@ -34,6 +34,14 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="disableMousePicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=cbByMouse,Path=IsChecked}" Value="False">
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
     <Grid>
 
@@ -65,7 +73,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25*"/>
                         <RowDefinition Height="25*"/>
-                        <RowDefinition Height="100*"/>
+                        <RowDefinition Height="25*"/>
+                        <RowDefinition Height="25*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50*"/>
@@ -108,6 +117,15 @@
                                 <TextBlock Text="{util:Localization ByCPUCheckBox}"/>
                             </CheckBox>
                             <wpfTool:IntegerUpDown Value="{Binding Path=ApplicationSettings.MaximumThreshold}" Style="{StaticResource disableIntegerPicker}"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="{util:Localization ByMouse}" Grid.Column="1" Grid.Row="2">
+                        <StackPanel>
+                            <CheckBox x:Name="cbByMouse" IsChecked="{Binding Path=ApplicationSettings.IsByMouseEnabled}">
+                                <TextBlock Text="{util:Localization ByCPUMouseBox}"/>
+                            </CheckBox>
+                            <wpfTool:IntegerUpDown Value="{Binding Path=ApplicationSettings.ShutdownPCTimeByMouse}" Style="{StaticResource disableMousePicker}"/>
                         </StackPanel>
                     </GroupBox>
                 </Grid>

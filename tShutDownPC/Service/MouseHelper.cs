@@ -5,31 +5,31 @@ namespace tShutDownPC.Service
 {
     public static class MouseHelper
     {
-        public static int Time { get; set; } = 60;
-        private static int Counter { get; set; } = 0;
+        //public static int Time { get; set; } = 60;
+        //private static int Counter { get; set; } = 0;
 
         private static Point PrevPoint { get; set; } = System.Windows.Forms.Cursor.Position;
         private static Point CurrPoint { get; set; } = System.Windows.Forms.Cursor.Position;
 
 
-        public static bool ComparePoints()
+        public static bool ComparePoints(ref int counter, int time)
         {
             CurrPoint = System.Windows.Forms.Cursor.Position;
 
-            Console.WriteLine($"[{PrevPoint.X},{PrevPoint.Y}] ==> [{CurrPoint.X},{CurrPoint.Y}] ({Counter})");
+            Console.WriteLine($"[{PrevPoint.X},{PrevPoint.Y}] ==> [{CurrPoint.X},{CurrPoint.Y}] ({counter})");
 
             if (PrevPoint != CurrPoint)
             {
                 PrevPoint = CurrPoint;
-                Counter = 0;
+                counter = 0;
                 return false;
             }
 
-            Counter++;
+            counter++;
 
-            if (Counter >= Time)
+            if (counter >= time)
             {
-                Counter = 0;
+                counter = 0;
                 return true;
             }
 
