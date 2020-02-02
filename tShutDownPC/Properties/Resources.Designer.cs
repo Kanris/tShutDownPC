@@ -88,11 +88,29 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to By Audio.
+        /// </summary>
+        public static string ByAudio {
+            get {
+                return ResourceManager.GetString("ByAudio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to By CPU.
         /// </summary>
         public static string ByCPU {
             get {
                 return ResourceManager.GetString("ByCPU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable shutdown by Audio activity.
+        /// </summary>
+        public static string ByCPUAudioBox {
+            get {
+                return ResourceManager.GetString("ByCPUAudioBox", resourceCulture);
             }
         }
         

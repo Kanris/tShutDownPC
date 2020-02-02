@@ -151,6 +151,48 @@ namespace tShutDownPC.Service
 
         #endregion mouse
 
+        #region audio
+
+        /// <summary>
+        /// Indicate is shutdown by timer is enabled
+        /// </summary>
+        private bool m_IsByAudioEnabled;
+        public bool IsByAudioEnabled
+        {
+            get => m_IsByAudioEnabled;
+            set
+            {
+                m_IsByAudioEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Shutdown time for bytimer
+        /// </summary>
+        private int m_ShutdownPCTimeByAudio = 30;
+        public int ShutdownPCTimeByAudio
+        {
+            get
+            {
+                return m_ShutdownPCTimeByAudio;
+            }
+            set
+            {
+                ShutdownCounterAudio = value;
+
+                m_ShutdownPCTimeByAudio = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Seconds to shutdown pc
+        /// </summary>
+        public int ShutdownCounterAudio;
+
+        #endregion audio
+
         /// <summary>
         /// Current application language
         /// </summary>

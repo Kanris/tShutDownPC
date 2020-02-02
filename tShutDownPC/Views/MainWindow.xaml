@@ -11,7 +11,7 @@
         xmlns:converters="clr-namespace:tShutDownPC.Converters"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="{util:Localization Title}" Height="450" Width="500" WindowStartupLocation="CenterScreen">
+        Title="{util:Localization Title}" Height="450" Width="500" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <ViewModels:MainWindowModel/>
     </Window.DataContext>
@@ -37,6 +37,14 @@
         <Style x:Key="disableMousePicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=cbByMouse,Path=IsChecked}" Value="False">
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="disableAudioPicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=cbByAudio,Path=IsChecked}" Value="False">
                     <Setter Property="IsEnabled" Value="False" />
                 </DataTrigger>
             </Style.Triggers>
@@ -128,6 +136,16 @@
                             <wpfTool:IntegerUpDown Value="{Binding Path=ApplicationSettings.ShutdownPCTimeByMouse}" Style="{StaticResource disableMousePicker}"/>
                         </StackPanel>
                     </GroupBox>
+
+                    <GroupBox Header="{util:Localization ByAudio}" Grid.Column="1" Grid.Row="3">
+                        <StackPanel>
+                            <CheckBox x:Name="cbByAudio" IsChecked="{Binding Path=ApplicationSettings.IsByAudioEnabled}">
+                                <TextBlock Text="{util:Localization ByCPUAudioBox}"/>
+                            </CheckBox>
+                            <wpfTool:IntegerUpDown Value="{Binding Path=ApplicationSettings.ShutdownPCTimeByAudio}" Style="{StaticResource disableAudioPicker}"/>
+                        </StackPanel>
+                    </GroupBox>
+
                 </Grid>
             </TabItem>
             <TabItem Header="{util:Localization AboutTab}">

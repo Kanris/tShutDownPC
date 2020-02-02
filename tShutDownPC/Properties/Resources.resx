@@ -126,8 +126,14 @@
   <data name="Activation" xml:space="preserve">
     <value>License Activation</value>
   </data>
+  <data name="ByAudio" xml:space="preserve">
+    <value>By Audio</value>
+  </data>
   <data name="ByCPU" xml:space="preserve">
     <value>By CPU</value>
+  </data>
+  <data name="ByCPUAudioBox" xml:space="preserve">
+    <value>Enable shutdown by Audio activity</value>
   </data>
   <data name="ByCPUCheckBox" xml:space="preserve">
     <value>Enable shutdown by CPU Load</value>

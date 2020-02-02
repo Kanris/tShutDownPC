@@ -9,8 +9,8 @@ namespace tShutDownPC.Service
 {
     public static class SpeakerHelper
     {
-        public static int Time { get; set; } = 10;
-        private static int Counter { get; set; } = 0;
+        //public static int Time { get; set; } = 10;
+        //private static int Counter { get; set; } = 0;
 
         private const float eps = 0.0001f;
 
@@ -20,7 +20,7 @@ namespace tShutDownPC.Service
         private static MMDeviceCollection devicesSpeaker = new MMDeviceEnumerator().EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
 
 
-        public static bool CompareMicrophone()
+        public static bool ComapreAudioNoise(ref int counter, int time)
         {
             foreach (var item in devicesSpeaker)
             {
@@ -28,23 +28,23 @@ namespace tShutDownPC.Service
                 CurrVolume += item.AudioMeterInformation.MasterPeakValue;
             }
 
-            Console.WriteLine($"PrevVolume: {PrevVolume} ==> CurrVolume:{CurrVolume} Counter:{Counter}");
+            Console.WriteLine($"PrevVolume: {PrevVolume} ==> CurrVolume:{CurrVolume} Counter:{counter}");
 
             if (Math.Abs(PrevVolume - CurrVolume) < eps)
             {
                 CurrVolume = 0;
-                Counter++;
+                counter++;
             }
             else
             {
                 PrevVolume = CurrVolume;
                 CurrVolume = 0;
-                Counter = 0;
+                counter = 0;
             }
 
-            if (Counter >= Time)
+            if (counter >= time)
             {
-                Counter = 0;
+                counter = 0;
                 return true;
             }
 

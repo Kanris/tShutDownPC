@@ -168,7 +168,7 @@ namespace tShutDownPC.ViewModels
         private void PerformShutdown(ShutdownOptions shutdownOptions)
         {
             Logger.WriteLog(ApplicationSettings.ShutdownType, shutdownOptions); //write log about shutdown
-            ShutdownPC.PerformShutdown(ApplicationSettings.ShutdownType); //perform shutdown base on type
+            //ShutdownPC.PerformShutdown(ApplicationSettings.ShutdownType); //perform shutdown base on type
 
             m_GlobalTimer.Stop(); //stop timer
         }
@@ -203,6 +203,14 @@ namespace tShutDownPC.ViewModels
             if (ApplicationSettings.IsByMouseEnabled)
             {
                 if (MouseHelper.ComparePoints(ref ApplicationSettings.ShutdownCounterMouse, ApplicationSettings.ShutdownPCTimeByMouse))
+                {
+                    PerformShutdown(ShutdownOptions.Load); //write log about shutdown and perform it
+                }
+            }
+
+            if (ApplicationSettings.IsByAudioEnabled)
+            {
+                if (SpeakerHelper.ComapreAudioNoise(ref ApplicationSettings.ShutdownCounterAudio, ApplicationSettings.ShutdownPCTimeByAudio))
                 {
                     PerformShutdown(ShutdownOptions.Load); //write log about shutdown and perform it
                 }
