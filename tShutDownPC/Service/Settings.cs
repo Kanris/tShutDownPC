@@ -253,6 +253,101 @@ namespace tShutDownPC.Service
 
         #endregion microphone
 
+        #region by day of the week
+
+        /// <summary>
+        /// Indicate is shutdown by timer is enabled
+        /// </summary>
+        private bool m_IsByDayOfTheWeekEnabled;
+        public bool IsByDayOfTheWeekEnabled
+        {
+            get => m_IsByDayOfTheWeekEnabled;
+            set
+            {
+                m_IsByDayOfTheWeekEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime m_MondayShutdownTime;
+        public DateTime MondayShutdownTime
+        {
+            get => m_MondayShutdownTime;
+            set
+            {
+                m_MondayShutdownTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime m_TuesdayShutdownTime;
+        public DateTime TuesdayShutdownTime
+        {
+            get => m_TuesdayShutdownTime;
+            set
+            {
+                m_TuesdayShutdownTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime m_WednesdayShutdownTime;
+        public DateTime WednesdayShutdownTime
+        {
+            get => m_WednesdayShutdownTime;
+            set
+            {
+                m_WednesdayShutdownTime = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        private DateTime m_ThursdayShutdownTime;
+        public DateTime ThursdayShutdownTime
+        {
+            get => m_ThursdayShutdownTime;
+            set
+            {
+                m_ThursdayShutdownTime = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        private DateTime m_FridayhutdownTime;
+        public DateTime FridayhutdownTime
+        {
+            get => m_FridayhutdownTime;
+            set
+            {
+                m_FridayhutdownTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime m_SaturdayhutdownTime;
+        public DateTime SaturdayhutdownTime
+        {
+            get => m_SaturdayhutdownTime;
+            set
+            {
+                m_SaturdayhutdownTime = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        private DateTime m_SundayShutdownTime;
+        public DateTime SundayShutdownTime
+        {
+            get => m_SundayShutdownTime;
+            set
+            {
+                m_SundayShutdownTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion by day of the week
+
         /// <summary>
         /// Current application language
         /// </summary>

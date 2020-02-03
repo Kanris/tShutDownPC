@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Timers;
@@ -256,6 +257,67 @@ namespace tShutDownPC.ViewModels
                 {
                     PerformShutdown(ShutdownOptions.Microphone); //write log about shutdown and perform it
                 }
+            }
+
+            //if pc shutdown by day of the week is enabled
+            if (ApplicationSettings.IsByDayOfTheWeekEnabled)
+            {
+                PerformDayOfTheWeekCheck();
+            }
+        }
+
+        /// <summary>
+        /// Base on current day of the week check is time to shutdown become or not
+        /// </summary>
+        private void PerformDayOfTheWeekCheck()
+        {
+            var currentDayOfTheWeek = DateTime.Now.DayOfWeek; //get current day of the week
+
+            switch (currentDayOfTheWeek)
+            {
+                case DayOfWeek.Monday:
+                    CheckTime(ApplicationSettings.MondayShutdownTime);
+                    break;
+                    
+                case DayOfWeek.Tuesday:
+                    CheckTime(ApplicationSettings.TuesdayShutdownTime);
+                    break;
+
+                case DayOfWeek.Wednesday:
+                    CheckTime(ApplicationSettings.WednesdayShutdownTime);
+                    break;
+
+                case DayOfWeek.Thursday:
+                    CheckTime(ApplicationSettings.ThursdayShutdownTime);
+                    break;
+
+                case DayOfWeek.Friday:
+                    CheckTime(ApplicationSettings.FridayhutdownTime);
+                    break;
+
+                case DayOfWeek.Saturday:
+                    CheckTime(ApplicationSettings.SaturdayhutdownTime);
+                    break;
+
+                case DayOfWeek.Sunday:
+                    CheckTime(ApplicationSettings.SundayShutdownTime);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Check is time to shutdown occurs
+        /// </summary>
+        /// <param name="dayOfTheWeek">setted time</param>
+        private void CheckTime(DateTime dayOfTheWeek)
+        {
+            var timeToShutdown = dayOfTheWeek.ToShortTimeString(); //get setted time in specific format
+            var currentTime = DateTime.Now.ToShortTimeString(); //get current time in specific format
+
+            //compare current and setted time
+            if (currentTime == timeToShutdown)
+            {
+                PerformShutdown(ShutdownOptions.Schedule); //write log about shutdown and perform it
             }
         }
 

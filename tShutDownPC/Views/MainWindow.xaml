@@ -59,7 +59,15 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-    
+
+        <Style x:Key="disableDayOfWeekPicker" TargetType="{x:Type StackPanel}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=cbByDayOfTheWeak,Path=IsChecked}" Value="False">
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
     <Grid>
 
@@ -94,6 +102,8 @@
                         <RowDefinition Height="25*"/>
                         <RowDefinition Height="25*"/>
                         <RowDefinition Height="25*"/>
+                        <RowDefinition Height="25*"/>
+                        <RowDefinition Height="100*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50*"/>
@@ -133,7 +143,6 @@
                             <CheckBox x:Name="cbByTimer" IsChecked="{Binding Path=ApplicationSettings.IsByTimerEnabled}">
                                 <TextBlock Text="{util:Localization ByTimerCheckBox}"/>
                             </CheckBox>
-                            <!--<wpfTool:TimePicker Value="{Binding Path=ShutdownPCTimerByTimer}" Style="{StaticResource disableTimePicker}" />-->
                             <TextBox Text="{Binding Path=ApplicationSettings.ShutdownPCTimeByTimer}" Style="{StaticResource disableTimePicker}" />
                         </StackPanel>
                     </GroupBox>
@@ -171,6 +180,53 @@
                                 <TextBlock Text="{util:Localization ByCPUMicrophoneBox}"/>
                             </CheckBox>
                             <wpfTool:IntegerUpDown Value="{Binding Path=ApplicationSettings.ShutdownPCTimeByMicrophone}" Style="{StaticResource disableMicrophonePicker}"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="{util:Localization ByDayOfTheWeek}" Grid.Column="1" Grid.Row="6">
+                        <StackPanel>
+                            <CheckBox x:Name="cbByDayOfTheWeak" IsChecked="{Binding Path=ApplicationSettings.IsByDayOfTheWeekEnabled}">
+                                <TextBlock Text="{util:Localization ByDayOfTheWeekBox}"/>
+                            </CheckBox>
+
+                            <StackPanel Style="{StaticResource disableDayOfWeekPicker}">
+
+                                <StackPanel Orientation="Horizontal" Margin="0 10 0 10">
+                                    <TextBlock Text="{util:Localization MondayTB}" Margin="0 0 10 0"/>
+                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.MondayShutdownTime}" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                    <TextBlock Text="{util:Localization TuesdayTB}" Margin="0 0 10 0"/>
+                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.TuesdayShutdownTime}" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                    <TextBlock Text="{util:Localization WednesdayTB}" Margin="0 0 10 0"/>
+                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.WednesdayShutdownTime}" />
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                    <TextBlock Text="{util:Localization ThursdayTB}" Margin="0 0 10 0"/>
+                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.ThursdayShutdownTime}" />
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                    <TextBlock Text="{util:Localization FridayTB}" Margin="0 0 10 0"/>
+                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.FridayhutdownTime}" />
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                    <TextBlock Text="{util:Localization SaturdayTB}" Margin="0 0 10 0"/>
+                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.SaturdayhutdownTime}" />
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                    <TextBlock Text="{util:Localization SundayTB}" Margin="0 0 10 0"/>
+                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.SundayShutdownTime}" />
+                                </StackPanel>
+
+                            </StackPanel>
                         </StackPanel>
                     </GroupBox>
 

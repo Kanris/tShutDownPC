@@ -151,6 +151,24 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to By day of the week.
+        /// </summary>
+        public static string ByDayOfTheWeek {
+            get {
+                return ResourceManager.GetString("ByDayOfTheWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable PC shutown by day of the week.
+        /// </summary>
+        public static string ByDayOfTheWeekBox {
+            get {
+                return ResourceManager.GetString("ByDayOfTheWeekBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to By Microphone.
         /// </summary>
         public static string ByMicrophone {
@@ -192,6 +210,15 @@ namespace tShutDownPC.Properties {
         public static string DisableInternetType {
             get {
                 return ResourceManager.GetString("DisableInternetType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Firday.
+        /// </summary>
+        public static string FridayTB {
+            get {
+                return ResourceManager.GetString("FridayTB", resourceCulture);
             }
         }
         
@@ -241,11 +268,29 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Monday.
+        /// </summary>
+        public static string MondayTB {
+            get {
+                return ResourceManager.GetString("MondayTB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reboot.
         /// </summary>
         public static string RebootType {
             get {
                 return ResourceManager.GetString("RebootType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saturday.
+        /// </summary>
+        public static string SaturdayTB {
+            get {
+                return ResourceManager.GetString("SaturdayTB", resourceCulture);
             }
         }
         
@@ -295,11 +340,47 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sunday.
+        /// </summary>
+        public static string SundayTB {
+            get {
+                return ResourceManager.GetString("SundayTB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thursday.
+        /// </summary>
+        public static string ThursdayTB {
+            get {
+                return ResourceManager.GetString("ThursdayTB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PC Shutdown program.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tuesday.
+        /// </summary>
+        public static string TuesdayTB {
+            get {
+                return ResourceManager.GetString("TuesdayTB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wednesday.
+        /// </summary>
+        public static string WednesdayTB {
+            get {
+                return ResourceManager.GetString("WednesdayTB", resourceCulture);
             }
         }
     }

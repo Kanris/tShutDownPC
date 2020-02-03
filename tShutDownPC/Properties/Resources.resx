@@ -147,6 +147,12 @@
   <data name="ByCPUMouseBox" xml:space="preserve">
     <value>Enable shutdown by Mouse activity</value>
   </data>
+  <data name="ByDayOfTheWeek" xml:space="preserve">
+    <value>By day of the week</value>
+  </data>
+  <data name="ByDayOfTheWeekBox" xml:space="preserve">
+    <value>Enable PC shutown by day of the week</value>
+  </data>
   <data name="ByMicrophone" xml:space="preserve">
     <value>By Microphone</value>
   </data>
@@ -161,6 +167,9 @@
   </data>
   <data name="DisableInternetType" xml:space="preserve">
     <value>DisableInternet</value>
+  </data>
+  <data name="FridayTB" xml:space="preserve">
+    <value>Firday</value>
   </data>
   <data name="HideInTray" xml:space="preserve">
     <value>On close hide in tray</value>
@@ -177,8 +186,14 @@
   <data name="LogoutType" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="MondayTB" xml:space="preserve">
+    <value>Monday</value>
+  </data>
   <data name="RebootType" xml:space="preserve">
     <value>Reboot</value>
+  </data>
+  <data name="SaturdayTB" xml:space="preserve">
+    <value>Saturday</value>
   </data>
   <data name="SaveSettings" xml:space="preserve">
     <value>Save settings</value>
@@ -195,7 +210,19 @@
   <data name="SleepType" xml:space="preserve">
     <value>Sleep</value>
   </data>
+  <data name="SundayTB" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="ThursdayTB" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>PC Shutdown program</value>
+  </data>
+  <data name="TuesdayTB" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="WednesdayTB" xml:space="preserve">
+    <value>Wednesday</value>
   </data>
 </root>
