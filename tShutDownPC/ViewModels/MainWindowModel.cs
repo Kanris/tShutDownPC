@@ -127,7 +127,7 @@ namespace tShutDownPC.ViewModels
                 e.Cancel = true;
                 App.Current.MainWindow.Visibility = Visibility.Hidden;
 
-                m_TrayService?.ShowTrayNotification();
+                m_TrayService?.ShowTrayNotification("Application is in tray");
             }
         }
 
@@ -200,6 +200,27 @@ namespace tShutDownPC.ViewModels
             ShutdownPC.PerformShutdown(ApplicationSettings.ShutdownType); //perform shutdown base on type
 
             m_GlobalTimer.Stop(); //stop timer
+
+            ApplicationSettings.IsUserNotified = false;
+        }
+
+        /// <summary>
+        /// Check is pc will be shutdown soon
+        /// </summary>
+        /// <param name="secondsToShutdownLeft">time left</param>
+        /// <returns>is pc will be shutdown soon</returns>
+        private bool IsCurrentShutdown(int secondsToShutdownLeft)
+        {
+            return ApplicationSettings.IsUserNotified = secondsToShutdownLeft == ApplicationSettings.NotificationTime;
+        }
+
+        private void NotifyUserAboutShutdown(bool isShutdownSoon)
+        {
+            if (isShutdownSoon)
+            {
+                ApplicationSettings.IsUserNotified = true;
+                m_TrayService.ShowTrayNotification($"{ApplicationSettings.ShutdownType} in {ApplicationSettings.NotificationTime} seconds");
+            }
         }
 
         /// <summary>
@@ -207,6 +228,8 @@ namespace tShutDownPC.ViewModels
         /// </summary>
         private void M_GlobalTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            var isShutdownSoon = false;
+
             //if shutdown by timer is enabled
             if (ApplicationSettings.IsByTimerEnabled)
             {
@@ -217,6 +240,8 @@ namespace tShutDownPC.ViewModels
                 }
                 else //timer is not expired
                     ApplicationSettings.ShutdownCounter++; //indicate one tick
+
+                isShutdownSoon = IsCurrentShutdown(ApplicationSettings.ShutdownPCTimeByTimer - ApplicationSettings.ShutdownCounter); //check is shutdown will occure soon
             }
 
             //if shutdown by CPU load is enabled
@@ -237,6 +262,8 @@ namespace tShutDownPC.ViewModels
                 {
                     PerformShutdown(ShutdownOptions.Mouse); //write log about shutdown and perform it
                 }
+
+                isShutdownSoon = IsCurrentShutdown(ApplicationSettings.ShutdownPCTimeByMouse - ApplicationSettings.ShutdownCounterMouse); //check is shutdown will occure soon
             }
 
             //is shutdown by audio enabled
@@ -247,6 +274,8 @@ namespace tShutDownPC.ViewModels
                 {
                     PerformShutdown(ShutdownOptions.Audio); //write log about shutdown and perform it
                 }
+
+                isShutdownSoon = IsCurrentShutdown(ApplicationSettings.ShutdownPCTimeByAudio - ApplicationSettings.ShutdownCounterAudio); //check is shutdown will occure soon
             }
 
             //is shutdown by microphone enabled
@@ -257,68 +286,77 @@ namespace tShutDownPC.ViewModels
                 {
                     PerformShutdown(ShutdownOptions.Microphone); //write log about shutdown and perform it
                 }
+
+                isShutdownSoon = IsCurrentShutdown(ApplicationSettings.ShutdownPCTimeByMicrophone - ApplicationSettings.ShutdownCounterMicrophone); //check is shutdown will occure soon
             }
 
             //if pc shutdown by day of the week is enabled
             if (ApplicationSettings.IsByDayOfTheWeekEnabled)
             {
-                PerformDayOfTheWeekCheck();
+                isShutdownSoon = IsCurrentShutdown(PerformDayOfTheWeekCheck());
             }
+
+            if (ApplicationSettings.IsUserNotified)
+                NotifyUserAboutShutdown(isShutdownSoon);
         }
 
         /// <summary>
         /// Base on current day of the week check is time to shutdown become or not
         /// </summary>
-        private void PerformDayOfTheWeekCheck()
+        private int PerformDayOfTheWeekCheck()
         {
             var currentDayOfTheWeek = DateTime.Now.DayOfWeek; //get current day of the week
+            var timeToShutdown = DateTime.MinValue;
+
 
             switch (currentDayOfTheWeek)
             {
                 case DayOfWeek.Monday:
-                    CheckTime(ApplicationSettings.MondayShutdownTime);
+                    timeToShutdown = ApplicationSettings.MondayShutdownTime;
                     break;
                     
                 case DayOfWeek.Tuesday:
-                    CheckTime(ApplicationSettings.TuesdayShutdownTime);
+                    timeToShutdown = ApplicationSettings.TuesdayShutdownTime;
                     break;
 
                 case DayOfWeek.Wednesday:
-                    CheckTime(ApplicationSettings.WednesdayShutdownTime);
+                    timeToShutdown = ApplicationSettings.WednesdayShutdownTime;
                     break;
 
                 case DayOfWeek.Thursday:
-                    CheckTime(ApplicationSettings.ThursdayShutdownTime);
+                    timeToShutdown = ApplicationSettings.ThursdayShutdownTime;
                     break;
 
                 case DayOfWeek.Friday:
-                    CheckTime(ApplicationSettings.FridayhutdownTime);
+                    timeToShutdown = ApplicationSettings.FridayhutdownTime;
                     break;
 
                 case DayOfWeek.Saturday:
-                    CheckTime(ApplicationSettings.SaturdayhutdownTime);
+                    timeToShutdown = ApplicationSettings.SaturdayhutdownTime;
                     break;
 
                 case DayOfWeek.Sunday:
-                    CheckTime(ApplicationSettings.SundayShutdownTime);
+                    timeToShutdown = ApplicationSettings.SundayShutdownTime;
                     break;
             }
+
+            return CheckTime(timeToShutdown);
         }
 
         /// <summary>
         /// Check is time to shutdown occurs
         /// </summary>
         /// <param name="dayOfTheWeek">setted time</param>
-        private void CheckTime(DateTime dayOfTheWeek)
+        private int CheckTime(DateTime dayOfTheWeek)
         {
-            var timeToShutdown = dayOfTheWeek.ToShortTimeString(); //get setted time in specific format
-            var currentTime = DateTime.Now.ToShortTimeString(); //get current time in specific format
+            var substractResult = Convert.ToInt32(dayOfTheWeek.TimeOfDay.Subtract(DateTime.Now.TimeOfDay).TotalSeconds);
 
-            //compare current and setted time
-            if (currentTime == timeToShutdown)
+            if (substractResult == 0)
             {
                 PerformShutdown(ShutdownOptions.Schedule); //write log about shutdown and perform it
             }
+
+            return substractResult;
         }
 
         #endregion methods

@@ -17,9 +17,25 @@ namespace tShutDownPC.Service
 
         private const string SETTING_NAME = "settings.cfg";
 
+        public bool IsUserNotified = false; //indicate is user notified before "shutdown"
+
         #endregion fields
 
         #region properties
+
+        /// <summary>
+        /// time left before shutdown
+        /// </summary>
+        private int m_NotificationTime = 10; 
+        public int NotificationTime
+        {
+            get => m_NotificationTime;
+            set
+            {
+                m_NotificationTime = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// What method of "shutdown" should we perform

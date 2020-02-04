@@ -48,9 +48,9 @@ namespace tShutDownPC.Service
         /// <summary>
         /// Display tray notification
         /// </summary>
-        public void ShowTrayNotification()
+        public void ShowTrayNotification(string messageToDisplay)
         {
-            m_TrayIcon.ShowBalloonTip(5000, "ShutdownPC", "Application is in tray", System.Windows.Forms.ToolTipIcon.Info);
+            m_TrayIcon.ShowBalloonTip(5000, "ShutdownPC", messageToDisplay, System.Windows.Forms.ToolTipIcon.Info);
         }
 
         /// <summary>
