@@ -211,12 +211,12 @@ namespace tShutDownPC.ViewModels
             if (ApplicationSettings.IsByTimerEnabled)
             {
                 //if timer is expired
-                if (ApplicationSettings.ShutdownCounter <= 0)
+                if (ApplicationSettings.ShutdownCounter >= ApplicationSettings.ShutdownPCTimeByTimer)
                 {
                     PerformShutdown(ShutdownOptions.Timer); //write log about shutdown and perform it
                 }
                 else //timer is not expired
-                    ApplicationSettings.ShutdownCounter--; //indicate one tick
+                    ApplicationSettings.ShutdownCounter++; //indicate one tick
             }
 
             //if shutdown by CPU load is enabled

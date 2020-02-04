@@ -81,7 +81,7 @@ namespace tShutDownPC.Service
             }
             set
             {
-                ShutdownCounter = value;
+                ShutdownCounter = 0;
 
                 m_ShutdownPCTimeByTimer = value;
                 OnPropertyChanged();
