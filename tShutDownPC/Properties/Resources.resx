@@ -189,6 +189,9 @@
   <data name="MondayTB" xml:space="preserve">
     <value>Monday</value>
   </data>
+  <data name="NotifyFor" xml:space="preserve">
+    <value>Warn for (seconds)</value>
+  </data>
   <data name="RebootType" xml:space="preserve">
     <value>Reboot</value>
   </data>

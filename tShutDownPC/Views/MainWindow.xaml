@@ -138,6 +138,12 @@
                         </StackPanel>
                     </GroupBox>
 
+                    <GroupBox Header="{util:Localization NotifyFor}" Grid.Column="0" Grid.Row="3">
+                        <StackPanel>
+                            <wpfTool:IntegerUpDown Value="{Binding Path=ApplicationSettings.NotificationTime}"/>
+                        </StackPanel>
+                    </GroupBox>
+
                     <GroupBox Header="{util:Localization ByTimer}" Grid.Column="1">
                         <StackPanel>
                             <CheckBox x:Name="cbByTimer" IsChecked="{Binding Path=ApplicationSettings.IsByTimerEnabled}">

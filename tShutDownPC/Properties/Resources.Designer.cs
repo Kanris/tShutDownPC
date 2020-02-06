@@ -277,6 +277,15 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Warn for (seconds).
+        /// </summary>
+        public static string NotifyFor {
+            get {
+                return ResourceManager.GetString("NotifyFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reboot.
         /// </summary>
         public static string RebootType {
