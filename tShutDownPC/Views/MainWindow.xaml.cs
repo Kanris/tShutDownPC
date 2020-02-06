@@ -24,7 +24,7 @@ namespace tShutDownPC
         {
             InitializeComponent();
 
-            if (!Protection.Protect.CheckAccess("101"))
+            if (!Protection.Protect.CheckAccess("100"))
             {
                 MessageBox.Show("К сожалению не удалось запустить приложение возможно у вас отсутствует интернет, если это не так свяжитесь с разработчиком \r\nTelegram: @Dem0nch1k");
                 Environment.Exit(0);
