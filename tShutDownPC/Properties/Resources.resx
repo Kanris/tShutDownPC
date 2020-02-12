@@ -186,6 +186,9 @@
   <data name="LogoutType" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="MainTab" xml:space="preserve">
+    <value>Main</value>
+  </data>
   <data name="MondayTB" xml:space="preserve">
     <value>Monday</value>
   </data>

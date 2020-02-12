@@ -9,11 +9,17 @@
         xmlns:ViewModels="clr-namespace:tShutDownPC.ViewModels"
         xmlns:util="clr-namespace:tShutDownPC.Service"
         xmlns:converters="clr-namespace:tShutDownPC.Converters"
+        xmlns:ctrl="clr-namespace:tShutDownPC.Controls"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
         Title="{util:Localization Title}" 
         SizeToContent="WidthAndHeight" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        MinHeight="800"
+        MinWidth="820"
+        Height="800"
+        Width="820">
     <Window.DataContext>
         <ViewModels:MainWindowModel/>
     </Window.DataContext>
@@ -22,7 +28,7 @@
 
         <Style x:Key="disableTimePicker" TargetType="{x:Type TextBox}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByTimer,Path=IsChecked}" Value="False">
+                <DataTrigger Binding="{Binding ElementName=cbByTimer,Path=IsChecked}" Value="True">
                     <Setter Property="IsEnabled" Value="False" />
                 </DataTrigger>
             </Style.Triggers>
@@ -30,7 +36,7 @@
 
         <Style x:Key="disableIntegerPicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByCPU,Path=IsChecked}" Value="False">
+                <DataTrigger Binding="{Binding ElementName=cbByCPU,Path=IsChecked}" Value="True">
                     <Setter Property="IsEnabled" Value="False" />
                 </DataTrigger>
             </Style.Triggers>
@@ -38,7 +44,7 @@
 
         <Style x:Key="disableMousePicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByMouse,Path=IsChecked}" Value="False">
+                <DataTrigger Binding="{Binding ElementName=cbByMouse,Path=IsChecked}" Value="True">
                     <Setter Property="IsEnabled" Value="False" />
                 </DataTrigger>
             </Style.Triggers>
@@ -46,7 +52,7 @@
 
         <Style x:Key="disableAudioPicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByAudio,Path=IsChecked}" Value="False">
+                <DataTrigger Binding="{Binding ElementName=cbByAudio,Path=IsChecked}" Value="True">
                     <Setter Property="IsEnabled" Value="False" />
                 </DataTrigger>
             </Style.Triggers>
@@ -54,7 +60,7 @@
 
         <Style x:Key="disableMicrophonePicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByMicrophone,Path=IsChecked}" Value="False">
+                <DataTrigger Binding="{Binding ElementName=cbByMicrophone,Path=IsChecked}" Value="True">
                     <Setter Property="IsEnabled" Value="False" />
                 </DataTrigger>
             </Style.Triggers>
@@ -62,14 +68,14 @@
 
         <Style x:Key="disableDayOfWeekPicker" TargetType="{x:Type StackPanel}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByDayOfTheWeak,Path=IsChecked}" Value="False">
+                <DataTrigger Binding="{Binding ElementName=cbByDayOfTheWeak,Path=IsChecked}" Value="True">
                     <Setter Property="IsEnabled" Value="False" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
     </Window.Resources>
-    <Grid>
+    <Grid >
 
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded">
@@ -94,6 +100,39 @@
             <MenuItem Header="{util:Localization SaveSettings}" Command="{Binding Path=SaveSettingsCommand}" />
         </Menu>
         <TabControl Grid.Row="1" Grid.Column="0">
+            <TabItem Header="{util:Localization MainTab}">
+                <Grid Background="WhiteSmoke">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"  />
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                        <Label  Content="Загрузка ЦП" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black">
+                            <Label.Effect>
+                                <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
+                            </Label.Effect>
+                        </Label>
+                        <ctrl:CircularProgress Grid.Row="0" Margin="200 0 0 0" Height="100" Width="100"  Value="{Binding CPULoad}" HorizontalAlignment="Center" />
+
+
+
+                    <Label Content="Уровень звука в микрофоне" Grid.Row="1" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
+                        </Label.Effect>
+                    </Label>
+                    <ctrl:CircularProgress Grid.Row="1" Margin="200 0 0 0" Height="100" Width="100"  Value="{Binding NoizeInMic}" HorizontalAlignment="Center" />
+
+                    <Label Content="Уровень звука в динамиках" Grid.Row="2" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
+                        </Label.Effect>
+                    </Label>
+                    <ctrl:CircularProgress Grid.Row="2" Margin="200 0 0 0"  Height="100" Width="100"  Value="{Binding NoizeInSpeaker}" HorizontalAlignment="Center" />
+
+                </Grid>
+            </TabItem>
             <TabItem Header="{util:Localization SettingsTab}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -180,7 +219,7 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <GroupBox Header="{util:Localization ByMicrophone}" Grid.Column="1" Grid.Row="5">
+                    <GroupBox Header="{util:Localization ByMicrophone}" Grid.Column="1" Grid.Row="4">
                         <StackPanel>
                             <CheckBox x:Name="cbByMicrophone" IsChecked="{Binding Path=ApplicationSettings.IsByMicrophoneEnabled}">
                                 <TextBlock Text="{util:Localization ByCPUMicrophoneBox}"/>
@@ -189,47 +228,47 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <GroupBox Header="{util:Localization ByDayOfTheWeek}" Grid.Column="1" Grid.Row="6">
+                    <GroupBox Header="{util:Localization ByDayOfTheWeek}" Grid.Column="1" Grid.Row="5" Margin="0,5,0,72" Grid.RowSpan="2">
                         <StackPanel>
-                            <CheckBox x:Name="cbByDayOfTheWeak" IsChecked="{Binding Path=ApplicationSettings.IsByDayOfTheWeekEnabled}">
+                            <CheckBox x:Name="cbByDayOfTheWeak" IsChecked="{Binding Path=ApplicationSettings.IsByDayOfTheWeekEnabled}" >
                                 <TextBlock Text="{util:Localization ByDayOfTheWeekBox}"/>
                             </CheckBox>
 
                             <StackPanel Style="{StaticResource disableDayOfWeekPicker}">
 
                                 <StackPanel Orientation="Horizontal" Margin="0 10 0 10">
-                                    <TextBlock Text="{util:Localization MondayTB}" Margin="0 0 10 0"/>
-                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.MondayShutdownTime}" />
+                                    <TextBlock Text="{util:Localization MondayTB}" Margin="0 0 10 0" Width="100"/>
+                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.MondayShutdownTime}" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                                    <TextBlock Text="{util:Localization TuesdayTB}" Margin="0 0 10 0"/>
-                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.TuesdayShutdownTime}" />
+                                    <TextBlock Text="{util:Localization TuesdayTB}" Margin="0 0 10 0" Width="100"/>
+                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.TuesdayShutdownTime}" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                                    <TextBlock Text="{util:Localization WednesdayTB}" Margin="0 0 10 0"/>
-                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.WednesdayShutdownTime}" />
+                                    <TextBlock Text="{util:Localization WednesdayTB}" Margin="0 0 10 0" Width="100"/>
+                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.WednesdayShutdownTime}" />
                                 </StackPanel>
-                                
+
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                                    <TextBlock Text="{util:Localization ThursdayTB}" Margin="0 0 10 0"/>
-                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.ThursdayShutdownTime}" />
+                                    <TextBlock Text="{util:Localization ThursdayTB}" Margin="0 0 10 0" Width="100"/>
+                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.ThursdayShutdownTime}" />
                                 </StackPanel>
-                                
+
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                                    <TextBlock Text="{util:Localization FridayTB}" Margin="0 0 10 0"/>
-                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.FridayhutdownTime}" />
+                                    <TextBlock Text="{util:Localization FridayTB}" Margin="0 0 10 0" Width="100"/>
+                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.FridayhutdownTime}" />
                                 </StackPanel>
-                                
+
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                                    <TextBlock Text="{util:Localization SaturdayTB}" Margin="0 0 10 0"/>
-                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.SaturdayhutdownTime}" />
+                                    <TextBlock Text="{util:Localization SaturdayTB}" Margin="0 0 10 0" Width="100"/>
+                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.SaturdayhutdownTime}" />
                                 </StackPanel>
-                                
+
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                                    <TextBlock Text="{util:Localization SundayTB}" Margin="0 0 10 0"/>
-                                    <wpfTool:TimePicker Value="{Binding Path=ApplicationSettings.SundayShutdownTime}" />
+                                    <TextBlock Text="{util:Localization SundayTB}" Margin="0 0 10 0" Width="100"/>
+                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.SundayShutdownTime}" />
                                 </StackPanel>
 
                             </StackPanel>

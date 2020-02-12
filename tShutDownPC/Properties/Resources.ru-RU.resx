@@ -135,6 +135,9 @@
   <data name="LanRu" xml:space="preserve">
     <value>РУ</value>
   </data>
+  <data name="MainTab" xml:space="preserve">
+    <value>Главная</value>
+  </data>
   <data name="SaveSettings" xml:space="preserve">
     <value>Сохранить настройки</value>
   </data>

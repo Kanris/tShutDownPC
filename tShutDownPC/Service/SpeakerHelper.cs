@@ -15,7 +15,7 @@ namespace tShutDownPC.Service
         private const float eps = 0.0001f;
 
         private static float PrevVolume { get; set; } = 0;
-        private static float CurrVolume { get; set; } = 0;
+        public static float CurrVolume { get; set; } = 0;
 
         private static MMDeviceCollection devicesSpeaker = new MMDeviceEnumerator().EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
 
@@ -45,11 +45,26 @@ namespace tShutDownPC.Service
             if (counter >= time)
             {
                 counter = 0;
-                return true;
+                Console.WriteLine($"Speak false");
+                return false;
             }
 
             return false;
         }
+
+        public static double GetVolume()
+        {
+            double tmp = 0;
+
+            foreach (var item in devicesSpeaker)
+            {
+                tmp += item.AudioMeterInformation.MasterPeakValue;
+            }
+            return tmp;
+        }
+     
+
+
 
     }
 }

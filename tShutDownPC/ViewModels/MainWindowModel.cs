@@ -15,6 +15,8 @@ namespace tShutDownPC.ViewModels
 
         private Timer m_GlobalTimer; //global timer that check is need to perform "shutdown"
 
+        private Timer m_ViewTimer; //timer for update view
+
         private PerformanceCounter cpuCounter; //CPU statistic
 
         private TrayService m_TrayService;
@@ -36,6 +38,44 @@ namespace tShutDownPC.ViewModels
                 OnPropertyChanged();
             }
         }
+
+
+        private double  _CPULoad=50;
+        public double CPULoad
+        {
+            get => _CPULoad;
+            set
+            {
+                _CPULoad = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private double _NoizeInMic = 20;
+        public double NoizeInMic
+        {
+            get => _NoizeInMic;
+            set
+            {
+                _NoizeInMic = value * 100;
+                OnPropertyChanged();
+            }
+        }
+
+        private double _NoizeInSpeaker = 50;
+        public double NoizeInSpeaker
+        {
+            get => _NoizeInSpeaker;
+            set
+            {
+                _NoizeInSpeaker = value*100;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+
 
         #endregion properties
 
@@ -90,6 +130,13 @@ namespace tShutDownPC.ViewModels
             m_GlobalTimer = new Timer(1 * 1000); //tick every 1 second
             m_GlobalTimer.Elapsed += M_GlobalTimer_Elapsed; //method to perform
             m_GlobalTimer.Start(); //start global timer
+
+
+            m_ViewTimer = new Timer(200);
+            m_ViewTimer.Elapsed += M_ViewTimer_Elapsed; //method to perform
+            m_ViewTimer.Start(); //start global timer
+
+
         }
 
         /// <summary>
@@ -228,6 +275,9 @@ namespace tShutDownPC.ViewModels
         /// </summary>
         private void M_GlobalTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            //Console.WriteLine(SpeakerHelper.CurrVolume);
+            //NoizeInMic = Convert.ToInt32(MicrophoneHelper.CurrVolume * 1000);
+            //NoizeInSpeaker = Convert.ToInt32(SpeakerHelper.CurrVolume * 1000);
             var isShutdownSoon = false;
 
             //if shutdown by timer is enabled
@@ -298,6 +348,15 @@ namespace tShutDownPC.ViewModels
 
             if (ApplicationSettings.IsUserNotified)
                 NotifyUserAboutShutdown(isShutdownSoon);
+        }
+
+
+
+        private void M_ViewTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            NoizeInSpeaker = SpeakerHelper.GetVolume();
+            NoizeInMic = MicrophoneHelper.GetVolume();
+            CPULoad = cpuCounter.NextValue();
         }
 
         /// <summary>
