@@ -25,7 +25,7 @@
     </Window.DataContext>
     <Window.Resources>
         <converters:ShutdownConverter x:Key="shutdownConverterKey" />
-
+        
         <Style x:Key="disableTimePicker" TargetType="{x:Type TextBox}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=cbByTimer,Path=IsChecked}" Value="True">
@@ -74,6 +74,12 @@
             </Style.Triggers>
         </Style>
 
+        <!--<ResourceDictionary x:Key="Controls">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Controls\ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>-->
+
     </Window.Resources>
     <Grid >
 
@@ -107,14 +113,14 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
-                        <Label  Content="Загрузка ЦП" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black">
+                   
+                    <Label  Content="Загрузка ЦП" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black">
                             <Label.Effect>
                                 <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
                             </Label.Effect>
-                        </Label>
-                        <ctrl:CircularProgress Grid.Row="0" Margin="200 0 0 0" Height="100" Width="100"  Value="{Binding CPULoad}" HorizontalAlignment="Center" />
-
+                    </Label>
+                    <ctrl:CircularProgress Grid.Row="0" Margin="200 0 0 0" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" />
+                    <ctrl:CircularProgress Grid.Row="0" Margin="200 0 0 0" Height="100" Width="100"  Opacity="50"   Value="{Binding CPULoad}" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FF38A033" />
 
 
                     <Label Content="Уровень звука в микрофоне" Grid.Row="1" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black">
@@ -122,6 +128,7 @@
                             <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
                         </Label.Effect>
                     </Label>
+                    <ctrl:CircularProgress Grid.Row="1" Margin="200 0 0 0" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" />
                     <ctrl:CircularProgress Grid.Row="1" Margin="200 0 0 0" Height="100" Width="100"  Value="{Binding NoizeInMic}" HorizontalAlignment="Center" />
 
                     <Label Content="Уровень звука в динамиках" Grid.Row="2" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black">
@@ -129,8 +136,10 @@
                             <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
                         </Label.Effect>
                     </Label>
+                    <ctrl:CircularProgress Grid.Row="2" Margin="200 0 0 0" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" />
                     <ctrl:CircularProgress Grid.Row="2" Margin="200 0 0 0"  Height="100" Width="100"  Value="{Binding NoizeInSpeaker}" HorizontalAlignment="Center" />
 
+                    <!--<ctrl:SliderButton Grid.Row="0" x:Name="sliderButton" Style="{StaticResource styleSliderButtonSideLabel}" Content="SliderButton" HorizontalAlignment="Left" Margin="659,104,0,0" VerticalAlignment="Top" />-->
                 </Grid>
             </TabItem>
             <TabItem Header="{util:Localization SettingsTab}">

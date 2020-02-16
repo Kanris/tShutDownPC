@@ -90,6 +90,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\CircularProgress.cs" />
+    <Compile Include="Controls\SliderButton.cs" />
     <Compile Include="Converters\ShutdownConverter.cs" />
     <Compile Include="Service\Dialog\DialogService.cs" />
     <Compile Include="Service\Dialog\DialogViewModelBase.cs" />
@@ -113,6 +114,10 @@
     <Compile Include="Service\ShutdownPC.cs" />
     <Compile Include="Service\SpeakerHelper.cs" />
     <Compile Include="Service\TranslationSource.cs" />
+    <Page Include="Controls\ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\LicenseDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

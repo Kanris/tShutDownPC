@@ -33,6 +33,9 @@ namespace tShutDownPC
                   
         }
 
+        private void CircularProgress_StylusOutOfRange(object sender, StylusEventArgs e)
+        {
 
+        }
     }
 }
