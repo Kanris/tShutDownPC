@@ -13,19 +13,23 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
+        xmlns:themes="clr-namespace:WPF.Themes;assembly=WPF.Themes"
+        themes:ThemeManager.Theme="{Binding ElementName=themes, Path=SelectedItem}"
         Title="{util:Localization Title}" 
+        Background="{DynamicResource WindowBackgroundBrush}" 
         SizeToContent="WidthAndHeight" 
         WindowStartupLocation="CenterScreen"
         MinHeight="800"
         MinWidth="820"
         Height="800"
-        Width="820">
+        Width="820"
+        Loaded="Window_Loaded">
     <Window.DataContext>
         <ViewModels:MainWindowModel/>
     </Window.DataContext>
     <Window.Resources>
         <converters:ShutdownConverter x:Key="shutdownConverterKey" />
-        
+
         <Style x:Key="disableTimePicker" TargetType="{x:Type TextBox}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=cbByTimer,Path=IsChecked}" Value="True">
@@ -97,8 +101,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Menu Grid.Row="0" Grid.Column="0" VerticalAlignment="Top">
-            <MenuItem Header="{util:Localization Language}" >
+        <Menu Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="40">
+            <MenuItem Header="{util:Localization Language}"  >
                 <MenuItem Header="{util:Localization LanEn}" Command="{Binding Path=ChangeLanguageToEnCommand}" />
                 <MenuItem Header="{util:Localization LanRu}" Command="{Binding Path=ChangeLanguageToRuCommand}"/>
             </MenuItem>
@@ -108,36 +112,40 @@
         <TabControl Grid.Row="1" Grid.Column="0">
             <TabItem Header="{util:Localization MainTab}">
                 <Grid Background="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="82*"/>
+                        <ColumnDefinition Width="725*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"  />
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                   
-                    <Label  Content="Загрузка ЦП" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black">
-                            <Label.Effect>
-                                <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
-                            </Label.Effect>
-                    </Label>
-                    <ctrl:CircularProgress Grid.Row="0" Margin="200 0 0 0" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" />
-                    <ctrl:CircularProgress Grid.Row="0" Margin="200 0 0 0" Height="100" Width="100"  Opacity="50"   Value="{Binding CPULoad}" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FF38A033" />
 
-
-                    <Label Content="Уровень звука в микрофоне" Grid.Row="1" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black">
+                    <Label  Content="Загрузка ЦП" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black" Grid.ColumnSpan="2" Margin="0,86,0,87">
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
                         </Label.Effect>
                     </Label>
-                    <ctrl:CircularProgress Grid.Row="1" Margin="200 0 0 0" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" />
-                    <ctrl:CircularProgress Grid.Row="1" Margin="200 0 0 0" Height="100" Width="100"  Value="{Binding NoizeInMic}" HorizontalAlignment="Center" />
+                    <ctrl:CircularProgress Grid.Row="0" Margin="371.5,70,253,71" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" Grid.Column="1" />
+                    <ctrl:CircularProgress Grid.Row="0" Margin="371.5,70,253,71" Height="100" Width="100"  Opacity="50"   Value="{Binding CPULoad}" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FF38A033" Grid.Column="1" />
 
-                    <Label Content="Уровень звука в динамиках" Grid.Row="2" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black">
+
+                    <Label Content="Уровень звука в микрофоне" Grid.Row="1" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black" Grid.ColumnSpan="2" Margin="0,86">
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
                         </Label.Effect>
                     </Label>
-                    <ctrl:CircularProgress Grid.Row="2" Margin="200 0 0 0" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" />
-                    <ctrl:CircularProgress Grid.Row="2" Margin="200 0 0 0"  Height="100" Width="100"  Value="{Binding NoizeInSpeaker}" HorizontalAlignment="Center" />
+                    <ctrl:CircularProgress Grid.Row="1" Margin="371.5,70,253,70" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" Grid.Column="1" />
+                    <ctrl:CircularProgress Grid.Row="1" Margin="371.5,70,253,70" Height="100" Width="100"  Value="{Binding NoizeInMic}" HorizontalAlignment="Center" Grid.Column="1" />
+
+                    <Label Content="Уровень звука в динамиках" Grid.Row="2" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black" Grid.ColumnSpan="2" Margin="0,86">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
+                        </Label.Effect>
+                    </Label>
+                    <ctrl:CircularProgress Grid.Row="2" Margin="371.5,70,253,70" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" Grid.Column="1" />
+                    <ctrl:CircularProgress Grid.Row="2" Margin="371.5,70,253,70"  Height="100" Width="100"  Value="{Binding NoizeInSpeaker}" HorizontalAlignment="Center" Grid.Column="1" />
 
                     <!--<ctrl:SliderButton Grid.Row="0" x:Name="sliderButton" Style="{StaticResource styleSliderButtonSideLabel}" Content="SliderButton" HorizontalAlignment="Left" Margin="659,104,0,0" VerticalAlignment="Top" />-->
                 </Grid>
@@ -189,6 +197,12 @@
                     <GroupBox Header="{util:Localization NotifyFor}" Grid.Column="0" Grid.Row="3">
                         <StackPanel>
                             <wpfTool:IntegerUpDown Value="{Binding Path=ApplicationSettings.NotificationTime}"/>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <GroupBox Header ="Select theme" Grid.Row="4"  Grid.Column="0" HorizontalAlignment="Left">
+                        <StackPanel>
+                        <ComboBox x:Name="themes" Width="300" Height="20" SelectionChanged="themes_SelectionChanged" SelectedIndex="0" />
                         </StackPanel>
                     </GroupBox>
 
@@ -281,7 +295,10 @@
                                 </StackPanel>
 
                             </StackPanel>
+
+
                         </StackPanel>
+
                     </GroupBox>
 
                 </Grid>

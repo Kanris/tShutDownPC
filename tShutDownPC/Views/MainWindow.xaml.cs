@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF.Themes;
 
 namespace tShutDownPC
 {
@@ -36,6 +37,19 @@ namespace tShutDownPC
         private void CircularProgress_StylusOutOfRange(object sender, StylusEventArgs e)
         {
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            themes.ItemsSource = ThemeManager.GetThemes().Where(x=>x !="ShinyRed" && x!= "ShinyBlue" && x!="DavesGlossyControls");
+        }
+
+        private void themes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                string theme = e.AddedItems[0].ToString();
+            }
         }
     }
 }
