@@ -40,6 +40,16 @@ namespace tShutDownPC.ViewModels
         }
 
 
+        private bool _isEnabled;
+        public bool IsEnabled {
+            get => _isEnabled;
+            set
+            {
+                _isEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
         private double  _CPULoad=50;
         public double CPULoad
         {
@@ -278,6 +288,12 @@ namespace tShutDownPC.ViewModels
             //Console.WriteLine(SpeakerHelper.CurrVolume);
             //NoizeInMic = Convert.ToInt32(MicrophoneHelper.CurrVolume * 1000);
             //NoizeInSpeaker = Convert.ToInt32(SpeakerHelper.CurrVolume * 1000);
+            if (IsEnabled==false)
+            {
+                return;
+            }
+
+
             var isShutdownSoon = false;
 
             //if shutdown by timer is enabled

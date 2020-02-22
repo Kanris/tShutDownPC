@@ -28,61 +28,12 @@
         <ViewModels:MainWindowModel/>
     </Window.DataContext>
     <Window.Resources>
-        <converters:ShutdownConverter x:Key="shutdownConverterKey" />
 
-        <Style x:Key="disableTimePicker" TargetType="{x:Type TextBox}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByTimer,Path=IsChecked}" Value="True">
-                    <Setter Property="IsEnabled" Value="False" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="disableIntegerPicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByCPU,Path=IsChecked}" Value="True">
-                    <Setter Property="IsEnabled" Value="False" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="disableMousePicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByMouse,Path=IsChecked}" Value="True">
-                    <Setter Property="IsEnabled" Value="False" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="disableAudioPicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByAudio,Path=IsChecked}" Value="True">
-                    <Setter Property="IsEnabled" Value="False" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="disableMicrophonePicker" TargetType="{x:Type wpfTool:IntegerUpDown}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByMicrophone,Path=IsChecked}" Value="True">
-                    <Setter Property="IsEnabled" Value="False" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="disableDayOfWeekPicker" TargetType="{x:Type StackPanel}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=cbByDayOfTheWeak,Path=IsChecked}" Value="True">
-                    <Setter Property="IsEnabled" Value="False" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <!--<ResourceDictionary x:Key="Controls">
+        <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="..\Controls\ResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>-->
+        </ResourceDictionary>
 
     </Window.Resources>
     <Grid >
@@ -94,14 +45,14 @@
         </i:Interaction.Triggers>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Menu Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="40">
+        <Menu Grid.Row="0" Grid.Column="0" VerticalAlignment="Top">
             <MenuItem Header="{util:Localization Language}"  >
                 <MenuItem Header="{util:Localization LanEn}" Command="{Binding Path=ChangeLanguageToEnCommand}" />
                 <MenuItem Header="{util:Localization LanRu}" Command="{Binding Path=ChangeLanguageToRuCommand}"/>
@@ -111,7 +62,7 @@
         </Menu>
         <TabControl Grid.Row="1" Grid.Column="0">
             <TabItem Header="{util:Localization MainTab}">
-                <Grid Background="WhiteSmoke">
+                <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="82*"/>
                         <ColumnDefinition Width="725*"/>
@@ -124,7 +75,7 @@
 
                     <Label  Content="Загрузка ЦП" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black" Grid.ColumnSpan="2" Margin="0,86,0,87">
                         <Label.Effect>
-                            <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
+                            <DropShadowEffect BlurRadius="10" Color="#FFE4E4E4" ></DropShadowEffect>
                         </Label.Effect>
                     </Label>
                     <ctrl:CircularProgress Grid.Row="0" Margin="371.5,70,253,71" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" Grid.Column="1" />
@@ -133,7 +84,7 @@
 
                     <Label Content="Уровень звука в микрофоне" Grid.Row="1" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black" Grid.ColumnSpan="2" Margin="0,86">
                         <Label.Effect>
-                            <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
+                            <DropShadowEffect BlurRadius="10" Color="#FFE4E4E4" ></DropShadowEffect>
                         </Label.Effect>
                     </Label>
                     <ctrl:CircularProgress Grid.Row="1" Margin="371.5,70,253,70" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" Grid.Column="1" />
@@ -141,13 +92,13 @@
 
                     <Label Content="Уровень звука в динамиках" Grid.Row="2" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black" Grid.ColumnSpan="2" Margin="0,86">
                         <Label.Effect>
-                            <DropShadowEffect BlurRadius="1" Color="#FFE4E4E4" ></DropShadowEffect>
+                            <DropShadowEffect BlurRadius="10" Color="#FFE4E4E4" ></DropShadowEffect>
                         </Label.Effect>
                     </Label>
                     <ctrl:CircularProgress Grid.Row="2" Margin="371.5,70,253,70" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" Grid.Column="1" />
                     <ctrl:CircularProgress Grid.Row="2" Margin="371.5,70,253,70"  Height="100" Width="100"  Value="{Binding NoizeInSpeaker}" HorizontalAlignment="Center" Grid.Column="1" />
 
-                    <!--<ctrl:SliderButton Grid.Row="0" x:Name="sliderButton" Style="{StaticResource styleSliderButtonSideLabel}" Content="SliderButton" HorizontalAlignment="Left" Margin="659,104,0,0" VerticalAlignment="Top" />-->
+
                 </Grid>
             </TabItem>
             <TabItem Header="{util:Localization SettingsTab}">
@@ -186,7 +137,7 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <GroupBox Header="{util:Localization ApplicationSettings}" Grid.Column="0" Grid.Row="2">
+                    <GroupBox Header="{util:Localization ApplicationSettings}" Grid.Column="0" Grid.Row="2" Foreground="Black">
                         <StackPanel>
                             <CheckBox IsChecked="{Binding Path=ApplicationSettings.IsHideInTray}">
                                 <TextBlock Text="{util:Localization HideInTray}"/>
@@ -200,9 +151,9 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <GroupBox Header ="Select theme" Grid.Row="4"  Grid.Column="0" HorizontalAlignment="Left">
+                    <GroupBox Header ="Select theme" Grid.Row="4"  Grid.Column="0">
                         <StackPanel>
-                        <ComboBox x:Name="themes" Width="300" Height="20" SelectionChanged="themes_SelectionChanged" SelectedIndex="0" />
+                            <ComboBox x:Name="themes" Width="300" Height="20" SelectionChanged="themes_SelectionChanged" SelectedIndex="0" Margin="46,0,45,0" />
                         </StackPanel>
                     </GroupBox>
 
@@ -300,6 +251,11 @@
                         </StackPanel>
 
                     </GroupBox>
+
+                    <GroupBox  Header="On/Off" Grid.Row="5" Grid.Column="0">
+                        <ctrl:SliderButton HorizontalAlignment="Center" x:Name="sliderButton" IsChecked="{Binding IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource styleSliderButtonRectangular}" Content="SliderButton"  VerticalAlignment="Top" Width="99" Height="30" Margin="246,10,46,0" />
+                    </GroupBox>
+
 
                 </Grid>
             </TabItem>
