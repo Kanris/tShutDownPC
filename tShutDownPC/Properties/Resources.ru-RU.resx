@@ -118,13 +118,80 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutDescription" xml:space="preserve">
-    <value>Программа позволяющая выключать ПК в зависимости от выбранных условий</value>
+    <value>POFF+ позволяет вам экономить электроэнергию и ресурсы компьютера за счет своевременного завершения его работы.
+
+Начало работы
+Выберите что нужно сделать с компьютером по наступлению таймера, выберите вариант его срабатывания и сделайте красный переключатель зелёным. 
+
+Лицензия
+Каждый пользователь может бесплатно опробовать нашу программу в течение месяца, однако, далее её нужно будет активировать. Чтобы купить лицензионный ключ, напишите нам на почту 
+pay@poff-plus.com</value>
   </data>
   <data name="AboutTab" xml:space="preserve">
     <value>О программе</value>
   </data>
+  <data name="Activate" xml:space="preserve">
+    <value>Активировать</value>
+  </data>
   <data name="Activation" xml:space="preserve">
     <value>Активация лицензии</value>
+  </data>
+  <data name="ApplicationSettings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="ByAudio" xml:space="preserve">
+    <value>Аудио (минуты)</value>
+  </data>
+  <data name="ByCPU" xml:space="preserve">
+    <value>ЦП (%)</value>
+  </data>
+  <data name="ByCPUAudioBox" xml:space="preserve">
+    <value>Выключение по аудио</value>
+  </data>
+  <data name="ByCPUCheckBox" xml:space="preserve">
+    <value>Включить выключение  по загрузке процессора</value>
+  </data>
+  <data name="ByCPUMicrophoneBox" xml:space="preserve">
+    <value>Включить выключение по микрофону</value>
+  </data>
+  <data name="ByCPUMouseBox" xml:space="preserve">
+    <value>Включить выключение по мышке</value>
+  </data>
+  <data name="ByDayOfTheWeek" xml:space="preserve">
+    <value>По дню недели (время)</value>
+  </data>
+  <data name="ByDayOfTheWeekBox" xml:space="preserve">
+    <value>Включить выключение по дню недели</value>
+  </data>
+  <data name="ByMicrophone" xml:space="preserve">
+    <value>По микрофону (минуты)</value>
+  </data>
+  <data name="ByMouse" xml:space="preserve">
+    <value>По мышке (минуты)</value>
+  </data>
+  <data name="ByTimer" xml:space="preserve">
+    <value>По таймеру (минуты)</value>
+  </data>
+  <data name="ByTimerCheckBox" xml:space="preserve">
+    <value>Включить выключение по таймеру</value>
+  </data>
+  <data name="CPULoad" xml:space="preserve">
+    <value>Загрузка ЦП</value>
+  </data>
+  <data name="DisableInternetType" xml:space="preserve">
+    <value>Отключить интернет</value>
+  </data>
+  <data name="EnterActivationCode" xml:space="preserve">
+    <value>Введите код лицензии</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="FridayTB" xml:space="preserve">
+    <value>Пятница</value>
+  </data>
+  <data name="HideInTray" xml:space="preserve">
+    <value>Скрыть в трей</value>
   </data>
   <data name="LanEn" xml:space="preserve">
     <value>EN</value>
@@ -135,16 +202,67 @@
   <data name="LanRu" xml:space="preserve">
     <value>РУ</value>
   </data>
+  <data name="LicenceActivationText" xml:space="preserve">
+    <value>Чтобы купить лицензионный ключ, напишите нам на почту pay@poff-plus.com</value>
+  </data>
+  <data name="LogoutType" xml:space="preserve">
+    <value>Выйти с системы</value>
+  </data>
   <data name="MainTab" xml:space="preserve">
     <value>Главная</value>
+  </data>
+  <data name="MondayTB" xml:space="preserve">
+    <value>Понедельник</value>
+  </data>
+  <data name="NoiseInMic" xml:space="preserve">
+    <value>Уровень звука в микрофоне</value>
+  </data>
+  <data name="NoiseInSpeaker" xml:space="preserve">
+    <value>Уровень звука в динамиках</value>
+  </data>
+  <data name="NotifyFor" xml:space="preserve">
+    <value>Предупреждение (минуты)</value>
+  </data>
+  <data name="OnAndOff" xml:space="preserve">
+    <value>Вкл/выкл</value>
+  </data>
+  <data name="RebootType" xml:space="preserve">
+    <value>Перезагрузка</value>
+  </data>
+  <data name="SaturdayTB" xml:space="preserve">
+    <value>Суббота</value>
   </data>
   <data name="SaveSettings" xml:space="preserve">
     <value>Сохранить настройки</value>
   </data>
+  <data name="SelectTheme" xml:space="preserve">
+    <value>Выберите тему</value>
+  </data>
   <data name="SettingsTab" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="ShutdownGroup" xml:space="preserve">
+    <value>Выберите"действие"</value>
+  </data>
+  <data name="ShutdownType" xml:space="preserve">
+    <value>Выключение</value>
+  </data>
+  <data name="SleepType" xml:space="preserve">
+    <value>Сон</value>
+  </data>
+  <data name="SundayTB" xml:space="preserve">
+    <value>Воскресенье</value>
+  </data>
+  <data name="ThursdayTB" xml:space="preserve">
+    <value>Четверг</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Программа выключения ПК</value>
+  </data>
+  <data name="TuesdayTB" xml:space="preserve">
+    <value>Вторник</value>
+  </data>
+  <data name="WednesdayTB" xml:space="preserve">
+    <value>Среда</value>
   </data>
 </root>

@@ -41,8 +41,8 @@
                // "BureauBlue", 
                 "BubbleCreme", 
                 "TwilightBlue",
-                "UXMusingsRed", 
-                "UXMusingsGreen", 
+                //"UXMusingsRed", 
+                //"UXMusingsGreen", 
                 //"UXMusingsRoughRed", 
                 //"UXMusingsRoughGreen", 
                 "UXMusingsBubblyBlue"

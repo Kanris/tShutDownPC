@@ -18,11 +18,13 @@
         Title="{util:Localization Title}" 
         Background="{DynamicResource WindowBackgroundBrush}" 
         SizeToContent="WidthAndHeight" 
-        WindowStartupLocation="CenterScreen"
-        MinHeight="800"
-        MinWidth="820"
-        Height="800"
-        Width="820"
+        WindowStartupLocation="Manual"
+        MinHeight="{Binding FormHeight}"
+        MinWidth="{Binding FormWidth}"
+        Height="{Binding FormHeight}"
+        Width="{Binding FormWidth}"
+        MaxHeight="{ Binding FormHeight}"
+        MaxWidth="{Binding FormWidth}"
         Loaded="Window_Loaded">
     <Window.DataContext>
         <ViewModels:MainWindowModel/>
@@ -53,51 +55,60 @@
         </Grid.ColumnDefinitions>
 
         <Menu Grid.Row="0" Grid.Column="0" VerticalAlignment="Top">
-            <MenuItem Header="{util:Localization Language}"  >
+            <!--<MenuItem Header="{util:Localization Language}"  >
                 <MenuItem Header="{util:Localization LanEn}" Command="{Binding Path=ChangeLanguageToEnCommand}" />
                 <MenuItem Header="{util:Localization LanRu}" Command="{Binding Path=ChangeLanguageToRuCommand}"/>
-            </MenuItem>
+            </MenuItem>-->
             <MenuItem Header="{util:Localization Activation}" Command="{Binding Path=OpenLicenseWindowCommand}" />
             <MenuItem Header="{util:Localization SaveSettings}" Command="{Binding Path=SaveSettingsCommand}" />
         </Menu>
-        <TabControl Grid.Row="1" Grid.Column="0">
+        <TabControl Grid.Row="1" Grid.Column="0" SelectedIndex="{Binding TabIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <TabItem Header="{util:Localization MainTab}">
                 <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="82*"/>
-                        <ColumnDefinition Width="725*"/>
+
+                        <ColumnDefinition Width="268*"/>
+                        <ColumnDefinition Width="269*"/>
+                        <ColumnDefinition Width="269*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"  />
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="30"  />
+                        <RowDefinition Height="280"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Label  Content="Загрузка ЦП" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black" Grid.ColumnSpan="2" Margin="0,86,0,87">
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontSize="15" Content="{Binding LicenseText, UpdateSourceTrigger=PropertyChanged}"/>
+                 
+
+                    <!--LOAD CPU-->
+                    <Label  Grid.Row="1" Grid.Column="0" Content="{util:Localization CPULoad}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="15" Padding="20" FontFamily="Arial Black" Height="57" >
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="10" Color="#FFE4E4E4" ></DropShadowEffect>
                         </Label.Effect>
                     </Label>
-                    <ctrl:CircularProgress Grid.Row="0" Margin="371.5,70,253,71" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" Grid.Column="1" />
-                    <ctrl:CircularProgress Grid.Row="0" Margin="371.5,70,253,71" Height="100" Width="100"  Opacity="50"   Value="{Binding CPULoad}" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FF38A033" Grid.Column="1" />
+                    <ctrl:CircularProgress Grid.Row="1" Grid.Column="0" Width="150" Height="150" Opacity="50"   Value="100" VerticalAlignment="Center" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" />
+                    <ctrl:CircularProgress Grid.Row="1" Grid.Column="0" Width="150" Height="150"   Opacity="50"   Value="{Binding CPULoad}" VerticalAlignment="Center" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FF38A033" />
+                    <Label Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding CPULoad}" FontSize="20"/>
 
-
-                    <Label Content="Уровень звука в микрофоне" Grid.Row="1" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black" Grid.ColumnSpan="2" Margin="0,86">
+                    <!--NOIZE IN MIC-->
+                    <Label Grid.Row="1" Grid.Column="1"  Content="{util:Localization NoiseInMic}" VerticalAlignment="Bottom" FontSize="15" Padding="20" FontFamily="Arial Black" Height="57" HorizontalAlignment="Center" >
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="10" Color="#FFE4E4E4" ></DropShadowEffect>
                         </Label.Effect>
                     </Label>
-                    <ctrl:CircularProgress Grid.Row="1" Margin="371.5,70,253,70" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" Grid.Column="1" />
-                    <ctrl:CircularProgress Grid.Row="1" Margin="371.5,70,253,70" Height="100" Width="100"  Value="{Binding NoizeInMic}" HorizontalAlignment="Center" Grid.Column="1" />
+                    <ctrl:CircularProgress Grid.Row="1" Grid.Column="1" Width="150" Height="150"  Opacity="50"   Value="100" VerticalAlignment="Center" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2"  />
+                    <ctrl:CircularProgress Grid.Row="1" Grid.Column="1" Width="150" Height="150"  Value="{Binding NoizeInMic}" VerticalAlignment="Center" HorizontalAlignment="Center"   />
+                    <Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding NoizeInMic, Converter={StaticResource DoubleToIntConverterKey}}" FontSize="20" />
 
-                    <Label Content="Уровень звука в динамиках" Grid.Row="2" VerticalAlignment="Center" FontSize="24" Padding="20" FontFamily="Arial Black" Grid.ColumnSpan="2" Margin="0,86">
+                    <!--NOIZE IN SPEAKER-->
+                    <Label Content="{util:Localization NoiseInSpeaker}" Grid.Row="1" Grid.Column="3" VerticalAlignment="Bottom" FontSize="16" Padding="20" FontFamily="Arial Black" Height="58" HorizontalAlignment="Center">
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="10" Color="#FFE4E4E4" ></DropShadowEffect>
                         </Label.Effect>
                     </Label>
-                    <ctrl:CircularProgress Grid.Row="2" Margin="371.5,70,253,70" Height="100" Width="100"  Opacity="50"   Value="100" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2" Grid.Column="1" />
-                    <ctrl:CircularProgress Grid.Row="2" Margin="371.5,70,253,70"  Height="100" Width="100"  Value="{Binding NoizeInSpeaker}" HorizontalAlignment="Center" Grid.Column="1" />
-
+                    <ctrl:CircularProgress Grid.Row="1" Grid.Column="2" Width="150" Height="150"   Opacity="50"   Value="100" VerticalAlignment="Center" HorizontalAlignment="Center" OpacityMask="#FFD30B0B" Stroke="#FFB2B2B2"   />
+                    <ctrl:CircularProgress Grid.Row="1" Grid.Column="2" Width="150" Height="150"   Value="{Binding NoizeInSpeaker}" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+                    <Label Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding NoizeInSpeaker,Converter={StaticResource DoubleToIntConverterKey}}" FontSize="20" />
 
                 </Grid>
             </TabItem>
@@ -109,8 +120,8 @@
                         <RowDefinition Height="25*"/>
                         <RowDefinition Height="25*"/>
                         <RowDefinition Height="25*"/>
-                        <RowDefinition Height="25*"/>
-                        <RowDefinition Height="100*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50*"/>
@@ -151,9 +162,9 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <GroupBox Header ="Select theme" Grid.Row="4"  Grid.Column="0">
-                        <StackPanel>
-                            <ComboBox x:Name="themes" Width="300" Height="20" SelectionChanged="themes_SelectionChanged" SelectedIndex="0" Margin="46,0,45,0" />
+                    <GroupBox Header ="{util:Localization SelectTheme}" Grid.Row="4"  Grid.Column="0">
+                        <StackPanel VerticalAlignment="Center">
+                            <ComboBox x:Name="themes" VerticalAlignment="Center" Width="300" Height="20" SelectionChanged="themes_SelectionChanged" SelectedIndex="0" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </GroupBox>
 
@@ -202,7 +213,7 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <GroupBox Header="{util:Localization ByDayOfTheWeek}" Grid.Column="1" Grid.Row="5" Margin="0,5,0,72" Grid.RowSpan="2">
+                    <GroupBox Header="{util:Localization ByDayOfTheWeek}" Grid.Column="1" Grid.Row="5"  Grid.RowSpan="1">
                         <StackPanel>
                             <CheckBox x:Name="cbByDayOfTheWeak" IsChecked="{Binding Path=ApplicationSettings.IsByDayOfTheWeekEnabled}" >
                                 <TextBlock Text="{util:Localization ByDayOfTheWeekBox}"/>
@@ -212,37 +223,37 @@
 
                                 <StackPanel Orientation="Horizontal" Margin="0 10 0 10">
                                     <TextBlock Text="{util:Localization MondayTB}" Margin="0 0 10 0" Width="100"/>
-                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.MondayShutdownTime}" />
+                                    <wpfTool:TimePicker  Width="250" Value="{Binding Path=ApplicationSettings.MondayShutdownTime}" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                                     <TextBlock Text="{util:Localization TuesdayTB}" Margin="0 0 10 0" Width="100"/>
-                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.TuesdayShutdownTime}" />
+                                    <wpfTool:TimePicker Width="250" Value="{Binding Path=ApplicationSettings.TuesdayShutdownTime}" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                                     <TextBlock Text="{util:Localization WednesdayTB}" Margin="0 0 10 0" Width="100"/>
-                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.WednesdayShutdownTime}" />
+                                    <wpfTool:TimePicker Width="250" Value="{Binding Path=ApplicationSettings.WednesdayShutdownTime}" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                                     <TextBlock Text="{util:Localization ThursdayTB}" Margin="0 0 10 0" Width="100"/>
-                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.ThursdayShutdownTime}" />
+                                    <wpfTool:TimePicker Width="250" Value="{Binding Path=ApplicationSettings.ThursdayShutdownTime}" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                                     <TextBlock Text="{util:Localization FridayTB}" Margin="0 0 10 0" Width="100"/>
-                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.FridayhutdownTime}" />
+                                    <wpfTool:TimePicker Width="250" Value="{Binding Path=ApplicationSettings.FridayhutdownTime}" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                                     <TextBlock Text="{util:Localization SaturdayTB}" Margin="0 0 10 0" Width="100"/>
-                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.SaturdayhutdownTime}" />
+                                    <wpfTool:TimePicker Width="250" Value="{Binding Path=ApplicationSettings.SaturdayhutdownTime}" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                                     <TextBlock Text="{util:Localization SundayTB}" Margin="0 0 10 0" Width="100"/>
-                                    <wpfTool:TimePicker Width="90" Value="{Binding Path=ApplicationSettings.SundayShutdownTime}" />
+                                    <wpfTool:TimePicker Width="250" Value="{Binding Path=ApplicationSettings.SundayShutdownTime}" />
                                 </StackPanel>
 
                             </StackPanel>
@@ -252,7 +263,7 @@
 
                     </GroupBox>
 
-                    <GroupBox  Header="On/Off" Grid.Row="5" Grid.Column="0">
+                    <GroupBox  Header="{util:Localization OnAndOff}" Grid.Row="5" Grid.Column="0">
                         <ctrl:SliderButton HorizontalAlignment="Center" x:Name="sliderButton" IsChecked="{Binding IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource styleSliderButtonRectangular}" Content="SliderButton"  VerticalAlignment="Top" Width="99" Height="30" Margin="246,10,46,0" />
                     </GroupBox>
 
@@ -260,7 +271,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="{util:Localization AboutTab}">
-                <TextBlock Text="{util:Localization AboutDescription}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <TextBox Text="{util:Localization AboutDescription}" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" IsEnabled="True" IsReadOnly="True" FontSize="16"/>
             </TabItem>
         </TabControl>
     </Grid>

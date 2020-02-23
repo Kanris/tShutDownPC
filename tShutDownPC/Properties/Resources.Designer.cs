@@ -61,7 +61,14 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на The program allows you to turn off the PC, depending on the selected conditions.
+        ///   Ищет локализованную строку, похожую на POFF + allows you to save energy and computer resources due to the timely completion of its work.
+        ///
+        ///Beginning of work
+        /// Choose what you need to do with the computer after the timer, select the option to fire it, and turn the red switch to green.
+        ///
+        ///License
+        ///Each user can try our program for free for a month, however, then it will need to be activated.  To buy a license key, write to us at 
+        ///pay@poff-plus.com.
         /// </summary>
         public static string AboutDescription {
             get {
@@ -75,6 +82,15 @@ namespace tShutDownPC.Properties {
         public static string AboutTab {
             get {
                 return ResourceManager.GetString("AboutTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Activate.
+        /// </summary>
+        public static string Activate {
+            get {
+                return ResourceManager.GetString("Activate", resourceCulture);
             }
         }
         
@@ -97,7 +113,7 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на By Audio.
+        ///   Ищет локализованную строку, похожую на By Audio (minutes).
         /// </summary>
         public static string ByAudio {
             get {
@@ -106,7 +122,7 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на By CPU.
+        ///   Ищет локализованную строку, похожую на By CPU (%).
         /// </summary>
         public static string ByCPU {
             get {
@@ -151,7 +167,7 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на By day of the week.
+        ///   Ищет локализованную строку, похожую на By day of the week (times).
         /// </summary>
         public static string ByDayOfTheWeek {
             get {
@@ -169,7 +185,7 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на By Microphone.
+        ///   Ищет локализованную строку, похожую на By Microphone (minutes).
         /// </summary>
         public static string ByMicrophone {
             get {
@@ -178,7 +194,7 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на By mouse.
+        ///   Ищет локализованную строку, похожую на By mouse (minutes).
         /// </summary>
         public static string ByMouse {
             get {
@@ -187,7 +203,7 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на By timer.
+        ///   Ищет локализованную строку, похожую на By timer (minutes).
         /// </summary>
         public static string ByTimer {
             get {
@@ -205,11 +221,38 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на CPU Load.
+        /// </summary>
+        public static string CPULoad {
+            get {
+                return ResourceManager.GetString("CPULoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на DisableInternet.
         /// </summary>
         public static string DisableInternetType {
             get {
                 return ResourceManager.GetString("DisableInternetType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Enter activation code.
+        /// </summary>
+        public static string EnterActivationCode {
+            get {
+                return ResourceManager.GetString("EnterActivationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Exit.
+        /// </summary>
+        public static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
             }
         }
         
@@ -259,6 +302,15 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Each user can try our program for free for a month, however, then it will need to be activated.  To buy a license key, write to us at pay@poff-plus.com.
+        /// </summary>
+        public static string LicenceActivationText {
+            get {
+                return ResourceManager.GetString("LicenceActivationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Logout.
         /// </summary>
         public static string LogoutType {
@@ -286,11 +338,38 @@ namespace tShutDownPC.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Warn for (seconds).
+        ///   Ищет локализованную строку, похожую на Microphone sound level.
+        /// </summary>
+        public static string NoiseInMic {
+            get {
+                return ResourceManager.GetString("NoiseInMic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Sound level in speakers.
+        /// </summary>
+        public static string NoiseInSpeaker {
+            get {
+                return ResourceManager.GetString("NoiseInSpeaker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Warn for (minutes).
         /// </summary>
         public static string NotifyFor {
             get {
                 return ResourceManager.GetString("NotifyFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на On/Off.
+        /// </summary>
+        public static string OnAndOff {
+            get {
+                return ResourceManager.GetString("OnAndOff", resourceCulture);
             }
         }
         
@@ -318,6 +397,15 @@ namespace tShutDownPC.Properties {
         public static string SaveSettings {
             get {
                 return ResourceManager.GetString("SaveSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Select theme.
+        /// </summary>
+        public static string SelectTheme {
+            get {
+                return ResourceManager.GetString("SelectTheme", resourceCulture);
             }
         }
         

@@ -91,6 +91,7 @@
     </ApplicationDefinition>
     <Compile Include="Controls\CircularProgress.cs" />
     <Compile Include="Controls\SliderButton.cs" />
+    <Compile Include="Converters\DoubleToIntConverter.cs" />
     <Compile Include="Converters\ShutdownConverter.cs" />
     <Compile Include="Service\Dialog\DialogService.cs" />
     <Compile Include="Service\Dialog\DialogViewModelBase.cs" />
@@ -180,6 +181,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\clock.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

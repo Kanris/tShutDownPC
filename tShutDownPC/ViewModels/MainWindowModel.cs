@@ -17,6 +17,8 @@ namespace tShutDownPC.ViewModels
 
         private Timer m_ViewTimer; //timer for update view
 
+        private Timer m_LicenseTimer; //timer for update view
+
         private PerformanceCounter cpuCounter; //CPU statistic
 
         private TrayService m_TrayService;
@@ -41,7 +43,8 @@ namespace tShutDownPC.ViewModels
 
 
         private bool _isEnabled;
-        public bool IsEnabled {
+        public bool IsEnabled
+        {
             get => _isEnabled;
             set
             {
@@ -50,18 +53,30 @@ namespace tShutDownPC.ViewModels
             }
         }
 
-        private double  _CPULoad=50;
+        private double _CPULoad = 1;
         public double CPULoad
         {
             get => _CPULoad;
             set
             {
-                _CPULoad = value;
+
+                if (_CPULoad < value)
+                {
+                    _CPULoad++;
+                }
+                else if (_CPULoad > value)
+                {
+                    _CPULoad--;
+                }
+                else
+                {
+                    _CPULoad = value;
+                }
                 OnPropertyChanged();
             }
         }
 
-        private double _NoizeInMic = 20;
+        private double _NoizeInMic = 1;
         public double NoizeInMic
         {
             get => _NoizeInMic;
@@ -72,13 +87,62 @@ namespace tShutDownPC.ViewModels
             }
         }
 
-        private double _NoizeInSpeaker = 50;
+        private double _NoizeInSpeaker = 1;
         public double NoizeInSpeaker
         {
             get => _NoizeInSpeaker;
             set
             {
-                _NoizeInSpeaker = value*100;
+                _NoizeInSpeaker = value * 100;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _LicenseText;
+        public string LicenseText
+        {
+            get => _LicenseText;
+            set
+            {
+                _LicenseText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _tabIndex;
+        public int TabIndex
+        {
+            get => _tabIndex;
+
+            set
+            {
+                _tabIndex = value;
+                ResizeForm();
+                OnPropertyChanged();
+            }
+        }
+
+        private int _formHeight = 800;
+        public int FormHeight
+        {
+            get => _formHeight;
+
+            set
+            {
+                _formHeight = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private int _formWidth = 800;
+        public int FormWidth
+        {
+            get => _formWidth;
+
+            set
+            {
+                _formWidth = value;
                 OnPropertyChanged();
             }
         }
@@ -137,15 +201,18 @@ namespace tShutDownPC.ViewModels
         /// </summary>
         private void InitTimer()
         {
-            m_GlobalTimer = new Timer(1 * 1000); //tick every 1 second
+            m_GlobalTimer = new Timer(1 * 1000 * 60); //tick every 1 min
             m_GlobalTimer.Elapsed += M_GlobalTimer_Elapsed; //method to perform
             m_GlobalTimer.Start(); //start global timer
 
-
-            m_ViewTimer = new Timer(200);
+            m_ViewTimer = new Timer(15);  // 60 fps
             m_ViewTimer.Elapsed += M_ViewTimer_Elapsed; //method to perform
-            m_ViewTimer.Start(); //start global timer
+            m_ViewTimer.Start(); //start timer for update view
 
+            M_LicenseTimer_Elapsed(null, null);
+            m_LicenseTimer = new Timer(1000 * 60 * 60);// check license every 1 hour
+            m_LicenseTimer.Elapsed += M_LicenseTimer_Elapsed; //method to perform
+            m_LicenseTimer.Start(); //start license timer
 
         }
 
@@ -237,6 +304,7 @@ namespace tShutDownPC.ViewModels
             InitVariables(); //initialize global valuse
             InitTimer(); //initialize and start global timer for shutdown
             InitTray(); //init tray icon
+            ResizeForm();
         }
 
         /// <summary>
@@ -288,7 +356,7 @@ namespace tShutDownPC.ViewModels
             //Console.WriteLine(SpeakerHelper.CurrVolume);
             //NoizeInMic = Convert.ToInt32(MicrophoneHelper.CurrVolume * 1000);
             //NoizeInSpeaker = Convert.ToInt32(SpeakerHelper.CurrVolume * 1000);
-            if (IsEnabled==false)
+            if (IsEnabled == false)
             {
                 return;
             }
@@ -367,12 +435,54 @@ namespace tShutDownPC.ViewModels
         }
 
 
-
+        //get new value (mic/speaker/cpu) for update view
         private void M_ViewTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             NoizeInSpeaker = SpeakerHelper.GetVolume();
             NoizeInMic = MicrophoneHelper.GetVolume();
             CPULoad = cpuCounter.NextValue();
+        }
+
+
+        //check license every 1 hour
+        private void M_LicenseTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            var activationTime = LicenseCheck.GetDateLicense();
+            Console.WriteLine(activationTime);
+            var days = (activationTime.AddDays(14) - DateTime.Now).Days;
+
+            if (activationTime == DateTime.MinValue)
+            {
+                if (ApplicationSettings.ApplicationLanguage == LanguageSettings.EN)
+                    LicenseText = "Program activated";
+                else
+                    LicenseText = "Программа активирована";
+
+                try
+                {
+                    m_LicenseTimer.Stop();
+                }
+                catch { }
+            }
+            else if (days <= 14)
+            {
+                if (ApplicationSettings.ApplicationLanguage == LanguageSettings.EN)
+                    LicenseText = $"Activate the program. You have {days} days left";
+                else
+                    LicenseText = $"Активируйте программу у вас осталось {days} дней";
+
+            }
+            else
+            {
+                if (ApplicationSettings.ApplicationLanguage == LanguageSettings.EN)
+                    LicenseText = "The program is NOT activated";
+                else
+                    LicenseText = $"Программа НЕ активирована";
+            }
+
+            //ApplicationSettings.ApplicationLanguage
+
+
         }
 
         /// <summary>
@@ -389,7 +499,7 @@ namespace tShutDownPC.ViewModels
                 case DayOfWeek.Monday:
                     timeToShutdown = ApplicationSettings.MondayShutdownTime;
                     break;
-                    
+
                 case DayOfWeek.Tuesday:
                     timeToShutdown = ApplicationSettings.TuesdayShutdownTime;
                     break;
@@ -433,6 +543,35 @@ namespace tShutDownPC.ViewModels
 
             return substractResult;
         }
+
+        private void ResizeForm()
+        {
+            switch (TabIndex)
+            {
+                case 0:
+                    FormHeight = 400;
+                    FormWidth = 800;
+                    break;
+
+                case 1:
+                    FormHeight = 800;
+                    FormWidth = 800;
+                    break;
+
+                case 2:
+                    FormHeight = 400;
+                    FormWidth = 800;
+                    break;
+
+                default:
+                    FormHeight = 400;
+                    FormWidth = 800;
+                    break;
+            }
+
+        }
+
+
 
         #endregion methods
 

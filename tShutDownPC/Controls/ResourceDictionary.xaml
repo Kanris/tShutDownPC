@@ -224,6 +224,7 @@
 
     <converters:ShutdownConverter x:Key="shutdownConverterKey" />
 
+    <converters:DoubleToIntConverter x:Key="DoubleToIntConverterKey"/>
     <Style x:Key="disableTimePicker" TargetType="{x:Type TextBox}">
         <Style.Triggers>
             <DataTrigger Binding="{Binding ElementName=cbByTimer,Path=IsChecked}" Value="True">

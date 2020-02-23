@@ -4,16 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:tShutDownPC.Service.Dialog"
+             xmlns:util="clr-namespace:tShutDownPC.Service"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="150" d:DesignWidth="300">
     <Grid Margin="4">
-        <TextBox Text="{Binding ActivationKey}" HorizontalAlignment="Left" Margin="35,30,0,0" Width="250"  VerticalAlignment="Top" />
+        <TextBlock Text="{util:Localization LicenceActivationText}" HorizontalAlignment="Center" TextWrapping="Wrap" Padding="5 5 5 5 " MaxWidth="300"/>
 
-        <Button Content="Activate" HorizontalAlignment="Left" Margin="135,70,0,0" VerticalAlignment="Top" Width="75"
+        <TextBox Text="{Binding ActivationKey}" HorizontalAlignment="Left" Margin="37,79,0,0" Width="250"  VerticalAlignment="Top" />
+
+        <Button Content="{util:Localization Activate}" HorizontalAlignment="Left" Margin="84,112,0,0" VerticalAlignment="Top" Width="100"
                 Command="{Binding ActivateCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
 
-        <Button Content="Close window" HorizontalAlignment="Left" Margin="215,70,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="{util:Localization Exit}" HorizontalAlignment="Left" Margin="189,112,0,0" VerticalAlignment="Top" Width="98"
                 Command="{Binding CloseActivationWindow}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
     </Grid>

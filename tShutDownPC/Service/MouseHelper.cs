@@ -16,7 +16,7 @@ namespace tShutDownPC.Service
         {
             CurrPoint = System.Windows.Forms.Cursor.Position;
 
-            Console.WriteLine($"[{PrevPoint.X},{PrevPoint.Y}] ==> [{CurrPoint.X},{CurrPoint.Y}] ({counter})");
+         
 
             if (PrevPoint != CurrPoint)
             {

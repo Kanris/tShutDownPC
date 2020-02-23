@@ -118,10 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutDescription" xml:space="preserve">
-    <value>The program allows you to turn off the PC, depending on the selected conditions</value>
+    <value>POFF + allows you to save energy and computer resources due to the timely completion of its work.
+
+Beginning of work
+ Choose what you need to do with the computer after the timer, select the option to fire it, and turn the red switch to green.
+
+License
+Each user can try our program for free for a month, however, then it will need to be activated.  To buy a license key, write to us at 
+pay@poff-plus.com</value>
   </data>
   <data name="AboutTab" xml:space="preserve">
     <value>About</value>
+  </data>
+  <data name="Activate" xml:space="preserve">
+    <value>Activate</value>
   </data>
   <data name="Activation" xml:space="preserve">
     <value>License Activation</value>
@@ -130,10 +140,10 @@
     <value>Application settings</value>
   </data>
   <data name="ByAudio" xml:space="preserve">
-    <value>By Audio</value>
+    <value>By Audio (minutes)</value>
   </data>
   <data name="ByCPU" xml:space="preserve">
-    <value>By CPU</value>
+    <value>By CPU (%)</value>
   </data>
   <data name="ByCPUAudioBox" xml:space="preserve">
     <value>Enable shutdown by Audio activity</value>
@@ -148,25 +158,34 @@
     <value>Enable shutdown by Mouse activity</value>
   </data>
   <data name="ByDayOfTheWeek" xml:space="preserve">
-    <value>By day of the week</value>
+    <value>By day of the week (times)</value>
   </data>
   <data name="ByDayOfTheWeekBox" xml:space="preserve">
     <value>Enable PC shutown by day of the week</value>
   </data>
   <data name="ByMicrophone" xml:space="preserve">
-    <value>By Microphone</value>
+    <value>By Microphone (minutes)</value>
   </data>
   <data name="ByMouse" xml:space="preserve">
-    <value>By mouse</value>
+    <value>By mouse (minutes)</value>
   </data>
   <data name="ByTimer" xml:space="preserve">
-    <value>By timer</value>
+    <value>By timer (minutes)</value>
   </data>
   <data name="ByTimerCheckBox" xml:space="preserve">
     <value>Enable shutdown by timer</value>
   </data>
+  <data name="CPULoad" xml:space="preserve">
+    <value>CPU Load</value>
+  </data>
   <data name="DisableInternetType" xml:space="preserve">
     <value>DisableInternet</value>
+  </data>
+  <data name="EnterActivationCode" xml:space="preserve">
+    <value>Enter activation code</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
   </data>
   <data name="FridayTB" xml:space="preserve">
     <value>Firday</value>
@@ -183,6 +202,9 @@
   <data name="LanRu" xml:space="preserve">
     <value>РУ</value>
   </data>
+  <data name="LicenceActivationText" xml:space="preserve">
+    <value>Each user can try our program for free for a month, however, then it will need to be activated.  To buy a license key, write to us at pay@poff-plus.com</value>
+  </data>
   <data name="LogoutType" xml:space="preserve">
     <value>Logout</value>
   </data>
@@ -192,8 +214,17 @@
   <data name="MondayTB" xml:space="preserve">
     <value>Monday</value>
   </data>
+  <data name="NoiseInMic" xml:space="preserve">
+    <value>Microphone sound level</value>
+  </data>
+  <data name="NoiseInSpeaker" xml:space="preserve">
+    <value>Sound level in speakers</value>
+  </data>
   <data name="NotifyFor" xml:space="preserve">
-    <value>Warn for (seconds)</value>
+    <value>Warn for (minutes)</value>
+  </data>
+  <data name="OnAndOff" xml:space="preserve">
+    <value>On/Off</value>
   </data>
   <data name="RebootType" xml:space="preserve">
     <value>Reboot</value>
@@ -203,6 +234,9 @@
   </data>
   <data name="SaveSettings" xml:space="preserve">
     <value>Save settings</value>
+  </data>
+  <data name="SelectTheme" xml:space="preserve">
+    <value>Select theme</value>
   </data>
   <data name="SettingsTab" xml:space="preserve">
     <value>Settings</value>

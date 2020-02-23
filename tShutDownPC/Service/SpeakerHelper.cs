@@ -24,11 +24,11 @@ namespace tShutDownPC.Service
         {
             foreach (var item in devicesSpeaker)
             {
-                Console.WriteLine($": {item.FriendlyName} \r\n: {item.AudioMeterInformation.MasterPeakValue}");
+               
                 CurrVolume += item.AudioMeterInformation.MasterPeakValue;
             }
 
-            Console.WriteLine($"PrevVolume: {PrevVolume} ==> CurrVolume:{CurrVolume} Counter:{counter}");
+         
 
             if (Math.Abs(PrevVolume - CurrVolume) < eps)
             {
@@ -45,7 +45,6 @@ namespace tShutDownPC.Service
             if (counter >= time)
             {
                 counter = 0;
-                Console.WriteLine($"Speak false");
                 return false;
             }
 

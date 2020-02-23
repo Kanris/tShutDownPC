@@ -18,7 +18,7 @@ namespace tShutDownPC.Service
         {
             try
             {
-                var pathToIcon = $@"{Directory.GetCurrentDirectory()}\Resources\icon.ico";
+                var pathToIcon = $@"{Directory.GetCurrentDirectory()}\Resources\clock.ico";
 
                 m_TrayIcon.Icon = new Icon(pathToIcon);
                 m_TrayIcon.Visible = true;

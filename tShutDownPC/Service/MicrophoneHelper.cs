@@ -59,7 +59,6 @@ namespace tShutDownPC.Service
             {
                 tmp += item.AudioMeterInformation.MasterPeakValue;
             }
-            Console.WriteLine("::" + tmp);
             return tmp;
         }
 
