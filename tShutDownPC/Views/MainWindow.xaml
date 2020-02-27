@@ -14,7 +14,7 @@
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
         xmlns:themes="clr-namespace:WPF.Themes;assembly=WPF.Themes"
-        themes:ThemeManager.Theme="{Binding ElementName=themes, Path=SelectedItem}"
+        themes:ThemeManager.Theme="{Binding ApplicationSettings.SelectedThemes, UpdateSourceTrigger=PropertyChanged}"
         Title="{util:Localization Title}" 
         Background="{DynamicResource WindowBackgroundBrush}" 
         SizeToContent="WidthAndHeight" 
@@ -24,8 +24,7 @@
         Height="{Binding FormHeight}"
         Width="{Binding FormWidth}"
         MaxHeight="{ Binding FormHeight}"
-        MaxWidth="{Binding FormWidth}"
-        Loaded="Window_Loaded">
+        MaxWidth="{Binding FormWidth}">
     <Window.DataContext>
         <ViewModels:MainWindowModel/>
     </Window.DataContext>
@@ -164,7 +163,7 @@
 
                     <GroupBox Header ="{util:Localization SelectTheme}" Grid.Row="4"  Grid.Column="0">
                         <StackPanel VerticalAlignment="Center">
-                            <ComboBox x:Name="themes" VerticalAlignment="Center" Width="300" Height="20" SelectionChanged="themes_SelectionChanged" SelectedIndex="0" HorizontalAlignment="Center"/>
+                            <ComboBox x:Name="themes" VerticalAlignment="Center" Width="300" SelectedItem="{Binding ApplicationSettings.SelectedThemes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ApplicationSettings.Themes, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </GroupBox>
 

@@ -8,11 +8,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using tShutDownPC.Service.Enums;
+using WPF.Themes;
 
 namespace tShutDownPC.Service
 {
     public class Settings : INotifyPropertyChanged
     {
+        int ignore_count = 2; 
         #region fields
 
         private const string SETTING_NAME = "settings.cfg";
@@ -33,6 +35,7 @@ namespace tShutDownPC.Service
             set
             {
                 m_NotificationTime = value;
+                ShutdownPCTimeByCPU = m_NotificationTime;
                 OnPropertyChanged();
             }
         }
@@ -108,6 +111,7 @@ namespace tShutDownPC.Service
         /// Seconds to shutdown pc
         /// </summary>
         public int ShutdownCounter;
+        public int ShutdownCounterCPU;
 
         #endregion timer
 
@@ -140,6 +144,23 @@ namespace tShutDownPC.Service
                 OnPropertyChanged();
             }
         }
+
+        private int m_ShutdownPCTimeByCPU = 1;
+        public int ShutdownPCTimeByCPU
+        {
+            get
+            {
+                return m_ShutdownPCTimeByCPU;
+            }
+            set
+            {
+                ShutdownCounterCPU = 0;
+
+                m_ShutdownPCTimeByCPU = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #endregion audio
 
@@ -364,6 +385,44 @@ namespace tShutDownPC.Service
 
         #endregion by day of the week
 
+
+        #region Themes
+
+        private string[] _Themes ;
+        public string[] Themes
+        {
+            get => _Themes;
+            set
+            {
+
+                _Themes = value;
+              
+
+            }
+        }
+
+
+
+        private string _SelectedThemes;
+        public string SelectedThemes
+        {
+            get
+            {
+                return _SelectedThemes;
+            }
+            set
+            {
+                if (value== "ExpressionDark" && ignore_count!=0)
+                {
+                    ignore_count--;
+                    return;
+                }
+
+                _SelectedThemes = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
         /// <summary>
         /// Current application language
         /// </summary>

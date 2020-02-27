@@ -33,28 +33,5 @@ namespace tShutDownPC
 
                   
         }
-
-        private void CircularProgress_StylusOutOfRange(object sender, StylusEventArgs e)
-        {
-
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //themes.ItemsSource = ThemeManager.GetThemes().Where(x=>x !="ShinyRed" && x!= "ShinyBlue" && x!="DavesGlossyControls");
-            themes.ItemsSource = ThemeManager.GetThemes();
-        }
-
-        private void themes_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-            {
-                string theme = e.AddedItems[0].ToString();
-            }
-         
-        }
-
-
-
     }
 }

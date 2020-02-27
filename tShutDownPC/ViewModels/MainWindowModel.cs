@@ -6,6 +6,7 @@ using System.Timers;
 using System.Windows;
 using tShutDownPC.Service;
 using tShutDownPC.Service.Enums;
+using WPF.Themes;
 
 namespace tShutDownPC.ViewModels
 {
@@ -19,9 +20,12 @@ namespace tShutDownPC.ViewModels
 
         private Timer m_LicenseTimer; //timer for update view
 
+
         private PerformanceCounter cpuCounter; //CPU statistic
 
         private TrayService m_TrayService;
+
+       // public string[] Themes =  ThemeManager.GetThemes();
 
         #endregion fields
 
@@ -179,6 +183,11 @@ namespace tShutDownPC.ViewModels
         private RelayCommand m_LoadedCommand;
         public RelayCommand LoadedCommand => m_LoadedCommand ?? (m_LoadedCommand = new RelayCommand(CheckLicense));
 
+
+
+        private RelayCommand m_ChangeThemeCommand;
+        public RelayCommand ChangeThemeCommand => m_ChangeThemeCommand ?? (m_ChangeThemeCommand = new RelayCommand(ChangeTheme));
+
         /// <summary>
         /// Command to save settings into settings file
         /// </summary>
@@ -213,7 +222,6 @@ namespace tShutDownPC.ViewModels
             m_LicenseTimer = new Timer(1000 * 60 * 60);// check license every 1 hour
             m_LicenseTimer.Elapsed += M_LicenseTimer_Elapsed; //method to perform
             m_LicenseTimer.Start(); //start license timer
-
         }
 
         /// <summary>
@@ -307,6 +315,12 @@ namespace tShutDownPC.ViewModels
             ResizeForm();
         }
 
+
+
+        public  void ChangeTheme(object obj)
+        {
+            Console.WriteLine("change");
+        }
         /// <summary>
         /// Save settings into file
         /// </summary>
@@ -322,7 +336,8 @@ namespace tShutDownPC.ViewModels
         private void PerformShutdown(ShutdownOptions shutdownOptions)
         {
             Logger.WriteLog(ApplicationSettings.ShutdownType, shutdownOptions); //write log about shutdown
-            ShutdownPC.PerformShutdown(ApplicationSettings.ShutdownType); //perform shutdown base on type
+            Console.WriteLine("==> off");
+            //ShutdownPC.PerformShutdown(ApplicationSettings.ShutdownType); //perform shutdown base on type
 
             m_GlobalTimer.Stop(); //stop timer
 
@@ -344,7 +359,7 @@ namespace tShutDownPC.ViewModels
             if (isShutdownSoon)
             {
                 ApplicationSettings.IsUserNotified = true;
-                m_TrayService.ShowTrayNotification($"{ApplicationSettings.ShutdownType} in {ApplicationSettings.NotificationTime} seconds");
+                m_TrayService.ShowTrayNotification($"{ApplicationSettings.ShutdownType} in {ApplicationSettings.NotificationTime} Minutes");
             }
         }
 
@@ -382,10 +397,15 @@ namespace tShutDownPC.ViewModels
             if (ApplicationSettings.IsByCpuLoadEnabled)
             {
                 //if cpu laod is greater than value
-                if (cpuCounter.NextValue() > ApplicationSettings.MaximumThreshold)
+                if (cpuCounter.NextValue() > ApplicationSettings.MaximumThreshold && ApplicationSettings.ShutdownCounterCPU >= ApplicationSettings.ShutdownPCTimeByCPU)
                 {
                     PerformShutdown(ShutdownOptions.Load); //write log about shutdown and perform it
                 }
+                else
+                {
+                    ApplicationSettings.ShutdownCounterCPU++; //indicate one tick
+                }
+                isShutdownSoon = IsCurrentShutdown(ApplicationSettings.ShutdownPCTimeByCPU - ApplicationSettings.ShutdownCounterCPU);
             }
 
             //is shutdown by mouse inactivity enabled
