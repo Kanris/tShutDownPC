@@ -14,7 +14,7 @@ namespace tShutDownPC.Service
 {
     public class Settings : INotifyPropertyChanged
     {
-        int ignore_count = 2; 
+
         #region fields
 
         private const string SETTING_NAME = "settings.cfg";
@@ -385,7 +385,6 @@ namespace tShutDownPC.Service
 
         #endregion by day of the week
 
-
         #region Themes
 
         private string[] _Themes ;
@@ -412,17 +411,12 @@ namespace tShutDownPC.Service
             }
             set
             {
-                if (value== "ExpressionDark" && ignore_count!=0)
-                {
-                    ignore_count--;
-                    return;
-                }
-
                 _SelectedThemes = value;
                 OnPropertyChanged();
             }
         }
         #endregion
+
         /// <summary>
         /// Current application language
         /// </summary>

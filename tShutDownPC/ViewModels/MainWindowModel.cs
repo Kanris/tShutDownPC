@@ -14,6 +14,7 @@ namespace tShutDownPC.ViewModels
     {
         #region fields
 
+        const int delta = 1; 
         private Timer m_GlobalTimer; //global timer that check is need to perform "shutdown"
 
         private Timer m_ViewTimer; //timer for update view
@@ -335,13 +336,29 @@ namespace tShutDownPC.ViewModels
         /// <param name="shutdownOptions">when shutdown occures</param>
         private void PerformShutdown(ShutdownOptions shutdownOptions)
         {
-            Logger.WriteLog(ApplicationSettings.ShutdownType, shutdownOptions); //write log about shutdown
-            Console.WriteLine("==> off");
-            //ShutdownPC.PerformShutdown(ApplicationSettings.ShutdownType); //perform shutdown base on type
+            Console.WriteLine("===>");
+            if (ApplicationSettings.NotificationTime==0)
+            {
+                ApplicationSettings.IsUserNotified = false;
+                Logger.WriteLog(ApplicationSettings.ShutdownType, shutdownOptions); //write log about shutdown
+                //Console.WriteLine("==> off");
+                //Console.WriteLine("==> off");
+                //Console.WriteLine("==> off");
+                //Console.WriteLine("==> off");
+                //Console.WriteLine("==> off");
+                ShutdownPC.PerformShutdown(ApplicationSettings.ShutdownType); //perform shutdown base on type
 
-            m_GlobalTimer.Stop(); //stop timer
+                m_GlobalTimer.Stop(); //stop timer
+            }
+            else
+            {
+                NotifyUserAboutShutdown(true);
+                ApplicationSettings.NotificationTime--;
+            }
 
-            ApplicationSettings.IsUserNotified = false;
+          
+
+            
         }
 
         /// <summary>
@@ -383,7 +400,7 @@ namespace tShutDownPC.ViewModels
             if (ApplicationSettings.IsByTimerEnabled)
             {
                 //if timer is expired
-                if (ApplicationSettings.ShutdownCounter >= ApplicationSettings.ShutdownPCTimeByTimer)
+                if (ApplicationSettings.ShutdownCounter+ delta >= ApplicationSettings.ShutdownPCTimeByTimer)
                 {
                     PerformShutdown(ShutdownOptions.Timer); //write log about shutdown and perform it
                 }
@@ -397,7 +414,7 @@ namespace tShutDownPC.ViewModels
             if (ApplicationSettings.IsByCpuLoadEnabled)
             {
                 //if cpu laod is greater than value
-                if (cpuCounter.NextValue() > ApplicationSettings.MaximumThreshold && ApplicationSettings.ShutdownCounterCPU >= ApplicationSettings.ShutdownPCTimeByCPU)
+                if (cpuCounter.NextValue() > ApplicationSettings.MaximumThreshold && ApplicationSettings.ShutdownCounterCPU+ delta >= ApplicationSettings.ShutdownPCTimeByCPU)
                 {
                     PerformShutdown(ShutdownOptions.Load); //write log about shutdown and perform it
                 }
@@ -450,8 +467,8 @@ namespace tShutDownPC.ViewModels
                 isShutdownSoon = IsCurrentShutdown(PerformDayOfTheWeekCheck());
             }
 
-            if (ApplicationSettings.IsUserNotified)
-                NotifyUserAboutShutdown(isShutdownSoon);
+            //if (ApplicationSettings.IsUserNotified)
+            //    NotifyUserAboutShutdown(isShutdownSoon);
         }
 
 

@@ -163,7 +163,7 @@
 
                     <GroupBox Header ="{util:Localization SelectTheme}" Grid.Row="4"  Grid.Column="0">
                         <StackPanel VerticalAlignment="Center">
-                            <ComboBox x:Name="themes" VerticalAlignment="Center" Width="300" SelectedItem="{Binding ApplicationSettings.SelectedThemes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ApplicationSettings.Themes, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" HorizontalAlignment="Center"/>
+                            <ComboBox x:Name="themes" VerticalAlignment="Center" Width="300" SelectedItem="{Binding ApplicationSettings.SelectedThemes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ApplicationSettings.Themes, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Center"/>
                         </StackPanel>
                     </GroupBox>
 
